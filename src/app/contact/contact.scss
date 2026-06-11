@@ -1,0 +1,185 @@
+.contact {
+    min-height: 100vh;
+    padding: 20px;
+    background: linear-gradient(135deg,
+            #f64d5921,
+            #de555f75,
+            #b98ba48c);
+}
+
+.contactCard {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(25px);
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+
+    h1 {
+        text-align: center;
+        color: #cf0c0c;
+        margin-bottom: 20px;
+        font-size: 42px;
+    }
+
+    .intro {
+        text-align: center;
+        font-size: 17px;
+        color: black;
+        line-height: 1.5;
+        margin-bottom: 35px;
+    }
+
+    .contactInfo {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        margin-top: 30px;
+        margin-bottom: 40px;
+
+        .infoColumn {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            .quickInfo {
+                padding: 20px;
+                background: rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(15px);
+                border-radius: 15px;
+                border: 1px solid rgba(255, 255, 255, 0.25);
+
+                h3 {
+                    color: #de555f;
+                    margin-bottom: 15px;
+                    font-size: 22px;
+                    margin-top: 0;
+                }
+
+                .quickInfoLinks {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+
+                    a {
+                        text-decoration: none;
+                        color: black;
+                        font-size: 16px;
+                        cursor: pointer;
+                        transition: 0.5s ease;
+
+                        &:hover {
+                            color: #de555f;
+                            transform: translateX(5px);
+                        }
+                    }
+                }
+            }
+        }
+
+        .infoItem {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+
+            h3 {
+                    color: #de555f;
+                    margin-bottom: 15px;
+                    font-size: 22px;
+                    margin-top: 0;
+                }
+
+            .socialLinks {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 9px;
+                margin-top: 10px;
+
+                a {
+                    text-decoration: none;
+                    padding: 10px 16px;
+                    background: rgba(255, 255, 255, 0.25);
+                    backdrop-filter: blur(15px);
+                    border: 1px solid rgba(255, 255, 255, 0.3);
+                    border-radius: 12px;
+                    color: #de555f;
+                    font-weight: 600;
+                    transition: all 0.3s ease;
+
+                    &:hover {
+                        background: #de555f;
+                        color: white;
+                        transform: translateY(-3px);
+                        box-shadow: 0 8px 18px rgba(222, 85, 95, 0.3);
+                    }
+                }
+            }
+
+            h3 {
+                color: #de555f;
+                margin-bottom: 12px;
+                font-size: 22px;
+            }
+
+            p {
+                color: #333;
+                line-height: 1.7;
+                margin: 0;
+            }
+
+
+            
+        }
+    }
+}
+
+.faqSection {
+    margin-top: 40px;
+
+    h2 {
+        text-align: center;
+        color: #cf0c0c;
+        margin-bottom: 25px;
+    }
+
+    .faqItem {
+        margin-bottom: 15px;
+        border-radius: 15px;
+        overflow: hidden;
+
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(15px);
+    }
+
+    .faqQuestion {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        padding: 18px 20px;
+        cursor: pointer;
+
+        h3 {
+            margin: 0;
+            color: #de555f;
+            font-size: 18px;
+        }
+
+        span {
+            font-size: 24px;
+            font-weight: bold;
+            color: #de555f;
+        }
+    }
+
+    .faqAnswer {
+        padding: 0 20px 20px;
+
+        p {
+            margin: 0;
+            color: #333;
+            line-height: 1.8;
+        }
+    }
+}

@@ -1,0 +1,84 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(90deg, rgb(246 59 59 / 78%), rgb(235 37 113 / 26%));
+    color: white;
+    padding: 24px 24px;
+    border-bottom: 4px solid #de555f;
+
+    .logo {
+        font-size: 33px;
+        font-weight: bold;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        cursor: pointer;
+        transition: 0.4s ease;
+
+        &:hover {
+            transform: scale(1.15);
+        }
+    }
+
+    .navleft {
+        display: flex;
+        gap: 20px;
+
+        a {
+            color: white;
+            font-size: 18px;
+            text-decoration: none;
+            padding: 8px;
+            font-family: sans-serif;
+            border-radius: 7px;
+            box-shadow:
+                0 4px 10px rgba(0, 0, 0, 0.15),
+                0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        a:hover {
+            box-shadow:
+                0 8px 18px rgba(0, 0, 0, 0.25),
+                0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+    }
+
+    .navright {
+        display: flex;
+        gap: 15px;
+
+        .nav-buttons {
+            padding: 10px 22px;
+            border: none;
+            outline: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #ee4b57, #de555f, #b98ba4);
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: sans-serif;
+            cursor: pointer;
+        }
+
+        .nav-buttons:hover {
+            background: linear-gradient(135deg,
+                    #d62839,
+                    #c44569,
+                    #9d6b9f);
+
+            transform: translateY(-2px);
+            box-shadow:
+                0 8px 20px rgba(214, 40, 57, 0.35),
+                0 4px 10px rgba(196, 69, 105, 0.25);
+        }
+
+        .nav-buttons:active {
+            transform: scale(0.98);
+        }
+    }
+}

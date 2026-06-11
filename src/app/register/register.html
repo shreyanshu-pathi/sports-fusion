@@ -1,0 +1,115 @@
+<div class="register-container">
+    <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+        <h2>Register</h2>
+
+        <div class="testRegister">
+            <label>Name</label>
+
+            <div class="input-wrapper">
+                <input type="text" formControlName="name" placeholder="Enter name">
+                <mat-icon matSuffix>person</mat-icon>
+            </div>
+            @if (registerForm.controls.name.invalid &&
+            (submitted || registerForm.controls.name.touched))
+            {
+            @if(registerForm.controls.name.errors?.['required']) {
+            <span class="error">Name is required</span>
+            }
+
+            @if(registerForm.controls.name.errors?.['minlength']) {
+            <span class="error">Minimum 3 characters required</span>
+            }
+            @if (registerForm.controls.name.errors?.['pattern']) {
+            <span class="error">Only letters are allowed</span>
+            }
+            }
+        </div>
+
+        <div class="testRegister">
+            <label>Phone</label>
+
+            <div class="input-wrapper">
+                <input type="tel" formControlName="phone" placeholder="Enter phone">
+                <mat-icon matSuffix>phone</mat-icon>
+            </div>
+            @if (registerForm.controls.phone.invalid && (submitted || registerForm.controls.phone.touched))
+            {
+            @if(registerForm.controls.phone.errors?.['required']) {
+            <span class="error">Phone number is required</span>
+            }
+            @if(registerForm.controls.phone.errors?.['pattern']) {
+            <span class="error">Only numbers are allowed and must be of 10 digits</span>
+            }
+            }
+        </div>
+
+        <div class="testRegister">
+                            <label>Email</label>
+                            
+            <div class="input-wrapper">
+                <input type="email" formControlName="email" placeholder="Enter email">
+                <mat-icon matSuffix>email</mat-icon>
+            </div>
+            @if(registerForm.controls.email.invalid && (submitted || registerForm.controls.email.touched))
+            {
+            @if(registerForm.controls.email.errors?.['required']){
+            <span class="error">Email is required</span>
+            }
+            @if(registerForm.controls.email.errors?.['email']){
+            <span class="error">Enter valid email address</span>
+            }
+            }
+
+        </div>
+
+        <div class="testRegister">
+                            <label>Password</label>
+
+            <div class="input-wrapper">
+                <input type="password" formControlName="password" placeholder="Enter password">
+                <mat-icon matSuffix>lock</mat-icon>
+            </div>
+            @if (registerForm.controls.password.invalid && (submitted || registerForm.controls.password.touched))
+            {
+            @if (registerForm.controls.password.errors?.['required']) {
+            <span class="error">Password is required</span>
+            }
+            @if (registerForm.controls.password.errors?.['minlength']) {
+            <span class="error">Password must be atleast 10 characters</span>
+            }
+            @if(registerForm.controls.password.errors?.['pattern']){
+            <span class="error">Password must contain uppercase, lowercase, number and a special character</span>
+            }
+            }
+        </div>
+
+        <div class="testRegister">
+            <label>Confirm Password</label>
+            
+            <div class="input-wrapper">
+                <input type="password" formControlName="confirmPassword" placeholder="Enter Confirm Password">
+                <mat-icon matSuffix>lock_reset</mat-icon>
+            </div>
+            @if (registerForm.controls.confirmPassword.invalid && (submitted ||
+            registerForm.controls.confirmPassword.touched))
+            {
+            @if (registerForm.controls.confirmPassword.errors?.['required']) {
+            <span class="error">Confirm Password is required</span>
+            }
+            @if (
+            registerForm.errors?.['passwordMismatch'] &&
+            registerForm.controls.confirmPassword.touched
+            ) {
+            <span class="error">Password does not match</span>
+            }
+            }
+        </div>
+
+        <button type="submit" class="register-btn">Register</button>
+        <!-- <button (click)="testsnackbar()">Test snackbar</button> -->
+
+        <div class="login-btn">
+            <p>Already a member? <a routerLink="/login">Login</a></p>
+        </div>
+    </form>
+</div>

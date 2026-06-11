@@ -1,0 +1,119 @@
+<div class="activities">
+
+    <div class="heroBanner">
+
+        <div class="heroContent">
+
+            <h1>Sports Activities Hub</h1>
+
+            <p>
+                Join tournaments, improve your skills through training sessions,
+                complete challenges, and stay updated with sports activities.
+            </p>
+
+            <div class="heroStats">
+                <span routerLink="/activities">Tournaments</span>
+                <span routerLink="/activities">Training Sessions</span>
+                <span routerLink="/activities">Challenges</span>
+                <span routerLink="/activities">Activity Feed</span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <section class="section">
+
+        <!-- Activity Section -->
+        <div class="contentBlock">
+
+            <h2>
+                <mat-icon>sports</mat-icon>
+                Activities
+            </h2>
+
+            <div class="activityFeed">
+                @for (activity of activities; track activity) {
+                <div class="feedItem">
+                    {{ activity }}
+                </div>
+                }
+            </div>
+
+            <!-- Tournaments Section-->
+
+            <h2>
+                <mat-icon>emoji_events</mat-icon>
+                Upcoming Tournaments
+            </h2>
+
+            <div class="cardGrid">
+
+                @for(tournament of tournaments; track tournament.title){
+
+                <div class="card">
+
+                    <h3>{{ tournament.title }}</h3>
+
+                    <p>📅 {{ tournament.date }}</p>
+                    <p>📍 {{ tournament.venue }}</p>
+                    <p>💰 Entry Fee: ₹{{ tournament.fee }}</p>
+                    <p>🎁 Prize Pool: {{ tournament.prize }}</p>
+
+                    <button>Register</button>
+
+                </div>
+
+                }
+
+            </div>
+
+            <!-- Challenges section -->
+            <h2>
+                <mat-icon>workspace_premium</mat-icon>
+                Sports Challenges
+            </h2>
+
+            <div class="challengeGrid">
+
+                @for(challenge of challenges; track challenge.title){
+
+                <div class="challengeCard">
+
+                    <h3>{{ challenge.title }}</h3>
+                    <p>Reward: {{ challenge.reward }}</p>
+
+                </div>
+
+                }
+
+            </div>
+
+            <!-- Training Sessions Section -->
+            <h2>
+                <mat-icon>directions_run</mat-icon>
+                Training Sessions
+            </h2>
+
+            <div class="cardGrid">
+
+                @for(session of trainingSessions; track session.sport){
+
+                <div class="card">
+
+                    <h3>{{ session.sport }}</h3>
+
+                    <p>👨‍🏫 Coach: {{ session.coach }}</p>
+                    <p>⏰ {{ session.timing }}</p>
+
+                    <button>Enroll</button>
+
+                </div>
+
+                }
+
+            </div>
+        </div>
+
+    </section>
+</div>

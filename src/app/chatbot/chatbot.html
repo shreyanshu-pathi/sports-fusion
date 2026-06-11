@@ -1,0 +1,42 @@
+<div class="chatbot-container">
+    @if(!isChatOpen){
+    <button class="chat-toggle" (click)="toggleChat()">
+        Chat now
+        <mat-icon>chat</mat-icon>
+    </button>
+    }
+
+    @if(isChatOpen){
+    <div class="chat-window">
+        <div class="chat-header">
+            <div>
+                <h3>Sports Fusion</h3>
+                <small>Online</small>
+            </div>
+
+            <button (click)="toggleChat()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+
+        <div class="chat-body">
+            @for(message of messages; track $index) {
+            <div class="message" [class.user]="message.sender === 'user'" [class.bot]="message.sender === 'bot'">
+                {{ message.text }}
+            </div>
+            }
+        </div>
+
+        <div class="chat-footer">
+            <input type="text" placeholder="Ask something..." [(ngModel)]="userInput" (keyup.enter)="sendMessage()">
+            <button (click)="sendMessage()">
+                <mat-icon>send</mat-icon>
+            </button>
+        </div>
+    </div>
+    }
+</div>
+
+<!-- <div style="position:fixed;bottom:20px;right:20px;background:red;color:white;padding:20px;z-index:99999">
+  CHATBOT TEST
+</div> -->

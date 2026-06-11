@@ -1,0 +1,430 @@
+<div class="dashboard">
+
+    <!-- @if(showProfileModal) {
+    <div class="modalOverlay" (click)="closeProfileModal()">
+
+        <div class="profileCard" (click)="$event.stopPropagation()">
+
+            <!-- Close Button -->
+    <!-- <button type="button" class="closeBtn" (click)="closeProfileModal()">x</button> -->
+
+    <!-- Display Picture
+            <div class="profileImageWrapper">
+
+                <img [src]="userProfile.image" alt="Profile Picture" class="profileImage">
+
+                @if (isEditingProfile) {
+                <button type="button" class="imageEditBtn" (click)="fileInput.click()">✏️</button>
+                <input #fileInput type="file" accept="image/*" hidden (change)="onImageSelected($event)">
+                }
+
+            </div> -->
+
+    <!-- <div class="profileInfo">
+
+                <div class="infoRow">
+                    <span>Name: </span>
+                    @if(isEditingProfile){
+                    <input type="text" [(ngModel)]="userProfile.name">
+                    } @else {
+                    <strong>{{ userProfile.name }}</strong>
+                    }
+                </div>
+
+                <div class="infoRow">
+                    <span>Email: </span>
+                    @if(isEditingProfile){
+                    <input type="email" [(ngModel)]="userProfile.email">
+                    } @else {
+                    <strong>{{ userProfile.email }}</strong>
+                    }
+                </div>
+
+                <div class="infoRow">
+                    <span>Phone: </span>
+                    @if(isEditingProfile){
+                    <input type="text" [(ngModel)]="userProfile.phone">
+                    } @else {
+                    <strong>{{ userProfile.phone }}</strong>
+                    }
+                </div>
+
+                <div class="infoRow">
+                    <span>Total Bookings: </span>
+                    <strong>{{ totalBookings }}</strong>
+                </div>
+
+                <div class="infoRow">
+                    <span>Last Booking: </span>
+                    <strong>{{ lastBookingDate || 'No bookings' }}</strong>
+                </div>
+
+                <div class="infoRow">
+                    <span>Member Since: </span>
+                    <strong>{{ memberSince }}</strong>
+                </div>
+
+            </div>
+
+            <div class="profileButtons">
+
+                @if (!isEditingProfile) {
+                <button type="button" class="editbtn" (click)="editProfile()">Edit</button>
+                } @else {
+                <button type="button" class="savebtn" (click)="saveProfile()">Save</button>
+                }
+
+            </div>
+
+        </div>
+
+    </div> 
+    }-->
+
+    <!-- Header -->
+    <div class="dashboardHeader">
+
+        <div class="welcomeText">
+            <h1>Welcome
+                @if (username) {
+                <span class="username">{{ username }}</span>
+                }
+            </h1>
+
+            <p>Manage your bookings, tournaments, and sports activities.</p>
+        </div>
+
+        <div class="dashboardButtons">
+            <button type="button" (click)="openProfileModal()">User Profile</button>
+            <button type="button" routerLink="/logout">Logout</button>
+        </div>
+
+    </div>
+
+
+    <!-- Booking -->
+    <div class="bookingContainer">
+
+        <!-- Left Panel -->
+        <div class="bookingCard">
+
+            <h2>Book Your Slot</h2>
+
+            <!-- Sport -->
+            <div class="section">
+                <h3>Select Sport</h3>
+
+                <div class="optionGrid">
+                    @for (sport of sports; track sport) {
+                    <button type="button" [class.active]="selectedSport === sport" (click)="selectSport(sport)">
+                        {{ sport }}
+                    </button>
+                    }
+                </div>
+            </div>
+
+            <!-- Venue -->
+            @if (selectedSport) {
+            <div class="section">
+
+                <h3>Select Venue</h3>
+
+                <div class="optionGrid">
+                    @for (venue of venues; track venue) {
+                    <button type="button" [class.active]="selectedVenue === venue" (click)="selectVenue(venue)">
+                        {{ venue }}
+                    </button>
+                    }
+                </div>
+
+            </div>
+            }
+
+            <!-- Court -->
+            @if (selectedVenue) {
+            <div class="section">
+
+                <h3>Select Court</h3>
+
+                <div class="optionGrid">
+                    @for (court of courts; track court) {
+                    <button type="button" [class.active]="selectedCourt === court" (click)="selectCourt(court)">
+                        {{ court }}
+                    </button>
+                    }
+                </div>
+
+            </div>
+            }
+
+            <!-- Players -->
+            @if (selectedCourt) {
+            <div class="section">
+
+                <h3>Number of Players</h3>
+                <div class="playerSection">
+                    <input type="number" min="1" placeholder="Enter number of players" [(ngModel)]="selectedPlayers"
+                        (ngModelChange)="onPlayersChange()">
+                    <mat-icon matSuffix>groups</mat-icon>
+                </div>
+
+                <!-- <mat-form-field appearance="outline" class="playerfield">
+                    <mat-label>Number of Players</mat-label>
+                    <input matInput type="number" min="1" [(ngModel)]="selectedPlayers"
+                        (ngModelChange)="onPlayersChange()">
+                    <mat-icon matSuffix>groups</mat-icon>
+                </mat-form-field> -->
+
+            </div>
+            }
+
+            <!-- Date & Time -->
+            @if (selectedPlayers) {
+            <div class="section">
+
+                <h3>Select Date & Time</h3>
+
+                <div class="dateSection">
+                    <input matInput [matDatepicker]="picker" [min]="minDate" [(ngModel)]="selectedDate"
+                        (ngModelChange)="calculateAmount()">
+                    <mat-icon class="calendarIcon" (click)="picker.open()">calendar_month</mat-icon>
+                    <mat-datepicker #picker></mat-datepicker>
+                </div>
+                <!-- <mat-form-field>
+
+                    <mat-label>Select Date</mat-label>
+                    <input matInput [matDatepicker]="picker" [min]="minDate" [(ngModel)]="selectedDate"
+                        (dateChange)="calculateAmount()">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+
+                </mat-form-field> -->
+
+                <div class="optionGrid">
+                    @for (slot of slots; track slot) {
+                    <button type="button" [class.active]="selectedSlot === slot" (click)="selectSlot(slot)">
+                        {{ slot }}
+                    </button>
+                    }
+                </div>
+
+            </div>
+            }
+
+            <!-- Payment Summary -->
+            @if (selectedSlot) {
+            <div class="paymentSection">
+                <h3>Payment Summary</h3>
+
+                <div class="paymentCard">
+
+                    <div class="paymentRow">
+                        <span>Sport</span>
+                        <strong>{{ selectedSport }}</strong>
+                    </div>
+
+                    <div class="paymentRow">
+                        <span>Players</span>
+                        <strong>{{ selectedPlayers }}</strong>
+                    </div>
+
+                    <div class="paymentRow">
+                        <span>Venue Fee</span>
+                        <strong>{{ bookingAmount }}</strong>
+                    </div>
+
+                    @if(isWeekend){
+                    <div class="paymentRow">
+                        <span>Weekend Pricing</span>
+                        <strong>+20%</strong>
+                    </div>
+
+                    }
+
+                    <div class="paymentRow">
+                        <span>Convenience Fee (GST)</span>
+                        <strong>50</strong>
+                    </div>
+
+                    <div class="paymentRow">
+                        <span>Discount</span>
+                        <strong>- {{ discountAmount }}</strong>
+                    </div>
+
+                    <div class="paymentRow">
+                        <span>Total Amount</span>
+                        <strong>{{ totalAmount }}</strong>
+                    </div>
+
+                    <!-- <div class="packageBox">
+
+                            <h4>{{ packageMessage }}</h4>
+
+                            <ul>
+                                <li>Free Drinking Water</li>
+                                <li>Equipment Assistance</li>
+                                <li>Priority Court Access</li>
+                                <li>Team Booking Support</li>
+                            </ul>
+
+                        </div> -->
+
+                    <!-- Coupon Section -->
+                    <div class="couponSection">
+
+                        <h4>Apply Coupon</h4>
+
+                        <div class="couponBox">
+                            <input type="text" placeholder="Enter coupon code" [(ngModel)]="couponCode">
+                            <button type="button" (click)="applyCoupon()">Apply</button>
+                        </div>
+
+                        <small>
+                            Available coupons:
+                            SPORT100,
+                            WELCOME50,
+                            FIRSTBOOK
+                        </small>
+
+                    </div>
+
+                    <!-- Cancellation Policy -->
+                    <div class="policyBox">
+
+                        <h4>Cancellation Policy </h4>
+
+                        <p>{{ cancellationMessage }}</p>
+
+                    </div>
+
+
+                    <div class="paymentMethods">
+
+                        <h4>Payment Mode</h4>
+
+                        <div class="methodGrid">
+                            <button type="button" [class.active]="selectedPaymentMethod === 'UPI'"
+                                (click)="selectedPaymentMethod = 'UPI'">UPI</button>
+                            <button type="button" [class.active]="selectedPaymentMethod === 'Card'"
+                                (click)="selectedPaymentMethod = 'Card'">Card</button>
+                            <button type="button" [class.active]="selectedPaymentMethod === 'Net Banking'"
+                                (click)="selectedPaymentMethod = 'Net Banking'">Net Banking</button>
+                            <button type="button" [class.active]="selectedPaymentMethod === 'Wallet'"
+                                (click)="selectedPaymentMethod = 'Wallet'">Wallet</button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            }
+
+            <!-- Review Button -->
+            @if (selectedPaymentMethod) {
+            <div class="submitSection">
+                <button type="button" class="submit-btn" (click)="submitBooking()">
+                    Review Details
+                </button>
+            </div>
+            }
+
+        </div>
+
+        <!-- Right panel -->
+        <div class="bookedSlots">
+
+            <h2>Booked Slots</h2>
+
+            @if (bookings.length > 0) {
+            @for (booking of bookings; track $index) {
+
+            <div class="bookingItem">
+                <h3>{{ booking.sport }}</h3>
+                <p>{{ booking.date}} & {{booking.time}}</p>
+                <p>{{ booking.court }}</p>
+                <p>{{ booking.venue }}</p>
+                <p>{{ booking.players }}</p>
+            </div>
+            }
+            } @else {
+            <p>No bookings yet</p>
+            }
+        </div>
+
+    </div>
+
+
+    <!-- Modal -->
+    @if (showReviewModal) {
+
+    <div class="modalOverlay" (click)="closeReviewModal()">
+
+        <div class="modalCard" (click)="$event.stopPropagation()">
+
+            <h2> Booking Summary</h2>
+
+            <div class="reviewSection">
+
+                <div class="review-item">
+                    <span>Sport: </span>
+                    <strong>{{ selectedSport }}</strong>
+                </div>
+
+                <div class="review-item">
+                    <span>Venue: </span>
+                    <strong>{{ selectedVenue }}</strong>
+                </div>
+
+                <div class="review-item">
+                    <span>Court: </span>
+                    <strong>{{ selectedCourt }}</strong>
+                </div>
+
+                <div class="review-item">
+                    <span>Players: </span>
+                    <strong>{{ selectedPlayers }}</strong>
+                </div>
+
+                <div class="review-item">
+                    <span>Date: </span>
+                    <strong>{{ selectedDate | date:'dd/MM/yyyy' }}</strong>
+                </div>
+
+                <div class="review-item">
+                    <span>Time: </span>
+                    <strong>{{ selectedSlot }}</strong>
+                </div>
+
+                <div class="review-item">
+                    <span>Payment mode: </span>
+                    <strong>{{ selectedPaymentMethod }}</strong>
+                </div>
+
+                <div class="review-item">
+                    <span>Amount: </span>
+                    <strong>{{ totalAmount }}</strong>
+                </div>
+
+                <div class="modalButtons">
+
+                    <button type="button" class="cancel-btn" (click)="closeReviewModal()">
+                        Cancel
+                    </button>
+
+                    <button type="button" class="confirm-btn" (click)="confirmBooking()">
+                        Confirm Booking
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    }
+
+</div>

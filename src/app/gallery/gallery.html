@@ -1,0 +1,39 @@
+<div class="gallery-page">
+
+    <div class="gallery-container">
+
+        <h1>Sports Gallery</h1>
+
+        <p class="intro">
+            Explore exciting moments from various sports activities,
+            tournaments, training sessions, and venue facilities at
+            Sports Fusion.
+        </p>
+
+        <div class="sportsGrid">
+
+            @for (sport of gallerySports; track sport.name) {
+
+            <div class="sportCard">
+                <h2>{{ sport.name }}</h2>
+
+                <div class="carousel">
+                    <button class="arrowBtn" (click)="prevImage(sport)"> &#10094;</button>
+                    <img [src]="sport.images[sport.currentIndex]" [alt]="sport.name">
+
+                    <button class="arrowBtn" (click)="nextImage(sport)">&#10095;</button>
+                </div>
+
+                <div class="dots">
+                    @for (image of sport.images; track $index) {
+                    <span class="dot" [class.active]="$index === sport.currentIndex"></span>
+                    }
+                </div>
+
+            </div>
+            }
+        </div>
+
+    </div>
+
+</div>

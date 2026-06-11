@@ -1,0 +1,108 @@
+<div class="contact">
+
+    <div class="contactCard">
+
+        <h1>Contact us</h1>
+
+        <p class="intro">
+            We'd love to hear from you. Whether you have questions about
+            bookings, tournaments, venues, or sports activities, our team is
+            here to help.
+        </p>
+
+        <!-- </div> -->
+
+        <div class="contactInfo">
+
+            <div class="infoColumn">
+                <div class="infoItem">
+
+                    <h3>📍 Address</h3>
+
+                    <p>Sports Fusion Headquarters<br>
+                        Madhapur, Hyderabad<br>
+                        Telangana, India
+                    </p>
+
+                </div>
+
+                <div class="infoItem">
+                    <h3>📞 Phone</h3>
+                    <p>+91- 98765 43210</p>
+                    <h3>📧 Email</h3>
+                    <p>support@sportsfusion.com</p>
+                </div>
+            </div>
+
+
+            <div class="infoColumn">
+                <div class="infoItem">
+                    <h3>⏰ Working Hours</h3>
+                    <p>
+                        Monday - Sunday: 11:00 AM - 10:00PM
+                    </p>
+                </div>
+
+                <div class="socialSection">
+                    <div class="infoItem">
+                        <h3>🌐 Follow us</h3>
+
+                        <div class="socialLinks">
+                            <a href="#">Facebook</a>
+                            <a href="#">Twitter</a>
+                            <a href="#">Instagram</a>
+                            <a href="#">Youtube</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quickInfo">
+
+                    <h3>Quick Information</h3>
+
+                    <div class="quickInfoLinks">
+                        <a routerLink="/gallery">Gallery</a>
+                        <a routerLink="/about">About Us</a>
+                        <a routerLink="/about">Park Rules & Regulations</a>
+                        <a routerLink="/feedback">Feedback</a>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- FAQs -->
+        <div class="faqSection">
+
+            <h2>Frequently Asked Questions</h2>
+
+            @for (faq of faqs; track $index) {
+
+            <div class="faqItem">
+
+                <div class="faqQuestion" (click)="toggleFaq($index)">
+
+                    <h3>{{ faq.question }}</h3>
+
+                    <span>
+                        {{ activeFaq === $index ? '−' : '+' }}
+                    </span>
+
+                </div>
+
+                @if (activeFaq === $index) {
+                <div class="faqAnswer">
+                    <p>{{ faq.answer }}</p>
+                </div>
+                }
+
+            </div>
+
+            }
+
+        </div>
+    </div>
+
+</div>

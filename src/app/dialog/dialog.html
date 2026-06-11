@@ -1,0 +1,48 @@
+<h2 mat-dialog-title>User Profile</h2>
+
+<mat-dialog-content>
+
+    <div class="profile-image">
+        @if (data.image) {
+        <img [src]="data.image" alt="Profile">
+        } @else {
+            <div class="no-image">
+                <mat-icon>account_circle</mat-icon>
+            </div>
+        }
+        <button mat-mini-fab type="button" class="edit-btn"
+            (click)="fileInput.click()"><mat-icon>edit</mat-icon></button>
+        <input #fileInput type="file" accept="image/*" hidden (change)="onImageSelected($event)">
+
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="data.name">
+
+        <mat-icon matSuffix>person</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" [(ngModel)]="data.email">
+
+        <mat-icon matSuffix>email</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Phone</mat-label>
+        <input matInput [(ngModel)]="data.phone">
+
+        <mat-icon matSuffix>phone</mat-icon>
+    </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+
+    <button mat-stroked-button (click)="close()">Cancel</button>
+
+    <button mat-raised-button color="primary" (click)="save()">Save</button>
+
+</mat-dialog-actions>

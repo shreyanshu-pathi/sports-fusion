@@ -1,0 +1,96 @@
+.gallery-page {
+    min-height: 100vh;
+    padding: 30px;
+    background: linear-gradient(135deg,
+            #f64d5921,
+            #de555f75,
+            #b98ba48c);
+
+    .gallery-container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 40px;
+        background: rgba(255, 255, 255, .15);
+        backdrop-filter: blur(25px);
+        border-radius: 20px;
+
+        h1 {
+            text-align: center;
+            color: #cf0c0c;
+            font-size: 42px;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 17px;
+        }
+
+        .sportsGrid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+
+            .sportCard {
+                padding: 20px;
+                background: rgba(255, 255, 255, .2);
+                backdrop-filter: blur(20px);
+                border-radius: 20px;
+
+                h2 {
+                    text-align: center;
+                    color: #de555f;
+                    margin-bottom: 20px;
+                }
+
+                .carousel {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+
+                    img {
+                        width: 80%;
+                        height: 240px;
+                        object-fit: cover;
+                        border-radius: 15px;
+                    }
+                }
+
+                .arrowBtn {
+                    border: none;
+                    width: 42px;
+                    height: 42px;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, .6);
+                    cursor: pointer;
+                    font-size: 20px;
+                    font-weight: bold;
+                    transition: .3s;
+
+                    &:hover {
+                        background: #de555f;
+                        color: white;
+                    }
+                }
+
+                .dots {
+                    display: flex;
+                    justify-content: center;
+                    gap: 8px;
+                    margin-top: 15px;
+                }
+
+                .dot {
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%;
+                    background: #ccc;
+                }
+
+                .dot.active {
+                    background: #de555f;
+                }
+            }
+        }
+    }
+}

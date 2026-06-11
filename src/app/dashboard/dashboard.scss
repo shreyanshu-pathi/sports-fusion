@@ -1,0 +1,591 @@
+.dashboard {
+    min-height: 100vh;
+    padding: 24px;
+    background: linear-gradient(135deg, rgb(246 77 89 / 29%), rgb(222 85 95 / 45%), rgb(185 139 164 / 88%));
+
+    .profileCard {
+        position: relative;
+        width: 100%;
+        max-width: 500px;
+        padding: 30px;
+        background: rgb(255 255 255);
+        backdrop-filter: blur(30px);
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 15px 40px rgb(0 0 0 / 70%);
+
+        .closeBtn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            border: none;
+            border-radius: 50%;
+            background: rgb(222 85 95 / 15%);
+            color: #de555f;
+            font-size: 17px;
+            font-weight: 600;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.3s ease;
+
+            &:hover {
+                background: #e76c7454;
+            }
+
+        }
+
+        .profileImageWrapper {
+            position: relative;
+            width: fit-content;
+            margin: 0 auto 25px;
+
+            .profileImage {
+                width: 130px;
+                height: 130px;
+                border-radius: 50%;
+                object-fit: cover;
+                border: 1px solid lightgrey;
+                margin-bottom: 25px;
+            }
+
+            .imageEditBtn {
+                position: absolute;
+                right: 15px;
+                bottom: 30px;
+                width: 30px;
+                height: 30px;
+                background: white;
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: none;
+                border-radius: 50%;
+                font-size: 14px;
+                transition: .3s ease;
+                cursor: pointer;
+
+                &:hover {
+                    background: rgba(255, 255, 255, 0.863);
+                }
+            }
+        }
+
+        // }
+
+        h2 {
+            color: #cf0c0c;
+            margin-bottom: 20px;
+            margin-top: 0;
+        }
+
+        .profileInfo {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            .infoRow {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                span {
+                    color: black;
+                    font-weight: 500;
+                    width: 115px;
+                    text-align: left;
+                }
+
+                strong {
+                    color: #de555f;
+                    width: 115px;
+                    text-align: left;
+                }
+            }
+        }
+
+        .profileButtons {
+            margin-top: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .editbtn,
+            .savebtn {
+                padding: 12px 24px;
+                width: fit-content;
+                border: none;
+                border-radius: 12px;
+                background: #de555f;
+                color: white;
+                font-weight: 600;
+                cursor: pointer;
+                transition: .3s ease;
+
+                &:hover {
+                    background: #c9434d;
+                    transform: translateY(-2px);
+                }
+            }
+        }
+    }
+}
+
+/* Header */
+.dashboardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 30px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(40px);
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+
+    .welcomeText {
+
+        h1 {
+            margin: 0;
+            color: #cf0c0c;
+            font-size: 40px;
+            font-weight: 700;
+        }
+
+        p {
+            color: #cf0c0c;
+            margin: 20px 0 0 0;
+            font-size: 18px;
+        }
+    }
+
+    .dashboardButtons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 12px;
+            background: white;
+            color: #de555f;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.5s ease;
+
+            &:hover {
+                background: #de555f;
+                color: white;
+                transform: translateY(-2px);
+            }
+        }
+
+    }
+}
+
+.bookingContainer {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+    align-items: start;
+
+    .bookingCard {
+        padding: 25px;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(40px);
+        border-radius: 20px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+
+
+        h2 {
+            margin: 0 0 15px;
+            color: #cf0c0c;
+            font-size: 32px;
+        }
+
+        .section {
+            margin-bottom: 35px;
+
+            h3 {
+                margin: 20px 0 10px;
+                color: #cf0c0c;
+                font-size: 24px;
+            }
+
+            .playerSection,
+            .dateSection {
+                position: relative;
+                width: 35%;
+
+                input {
+                    width: 100%;
+                    padding: 8px 40px 8px 15px;
+                    border: 1px solid #ddd;
+                    border-radius: 10px;
+                    box-sizing: border-box;
+                    font-size: 15px;
+                    outline: none;
+                    transition: 0.3s;
+
+                    &:focus {
+                        border-color: #de555f;
+                        box-shadow: 0 0 5px rgba(222, 85, 95, 0.3);
+                    }
+                }
+
+                mat-icon {
+                    position: absolute;
+                    right: 12px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    color: #de555f;
+                }
+            }
+
+            .calendarIcon {
+                position: absolute;
+                right: 12px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: #de555f;
+                cursor: pointer;
+                font-size: 20px;
+                z-index: 2;
+            }
+
+            // .calendarIcon {
+            //     position: absolute;
+            //     right: 15px;
+            //     top: 48%;
+            //     transform: translateY(-50%);
+            //     color: #de555f;
+            //     cursor: pointer;
+            //     font-size: 22px;
+            //     z-index: 2;
+            // }
+
+            .optionGrid {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+
+                button {
+                    padding: 10px 18px;
+                    margin-top: 10px;
+                    border: none;
+                    border-radius: 12px;
+                    background: white;
+                    color: #de555f;
+                    font-size: 15px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: 0.5s ease;
+
+                    &:hover {
+                        background: #de555f;
+                        color: white;
+                        transform: translateY(-2px);
+                    }
+
+                    &.active {
+                        background: #de555f;
+                        color: white;
+                    }
+                }
+            }
+
+            .playerField {
+                width: 280px;
+
+                ::ng-deep .mat-mdc-text-field-wrapper {
+                    border-radius: 12px;
+                }
+            }
+
+            .datePicker {
+                width: 280px;
+
+                ::ng-deep .mat-mdc-text-field-wrapper {
+                    border-radius: 12px;
+                }
+            }
+        }
+
+        .paymentSection {
+            margin-top: 20px;
+
+            h3 {
+                color: #cf0c0c;
+                margin-bottom: 20px;
+                font-size: 24px;
+            }
+
+            .paymentCard {
+                padding: 25px;
+                background: rgba(255, 255, 255, .18);
+                backdrop-filter: blur(20px);
+                border-radius: 20px;
+
+                .paymentRow {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-top: 15px;
+
+                    span {
+                        color: #000000;
+                        font-weight: 500;
+                        font-size: 17px;
+                    }
+
+                    strong {
+                        color: #de555f;
+                        font-size: 17px;
+                    }
+                }
+
+                // .packageBox {
+                //     margin-top: 25px;
+                //     padding: 18px;
+                //     background: rgba(255, 255, 255, .6);
+                //     border-radius: 12px;
+
+                //     h4 {
+                //         margin-top: 0;
+                //         color: #cf0c0c;
+                //     }
+
+                //     ul {
+                //         margin: 10px 0 0;
+                //         padding-left: 20px;
+
+                //         li {
+                //             margin-bottom: 8px;
+                //         }
+                //     }
+                // }
+
+                .couponSection {
+                    margin-top: 25px;
+
+                    h4 {
+                        margin-bottom: 12px;
+                        color: #cf0c0c;
+                    }
+
+                    .couponBox {
+                        display: flex;
+                        gap: 10px;
+
+                        input {
+                            padding: 12px;
+                            flex: 1;
+                            border: none;
+                            border-radius: 10px;
+                        }
+
+                        button {
+                            padding: 12px 18px;
+                            border: none;
+                            border-radius: 10px;
+                            cursor: pointer;
+                            background: #de555f;
+                            color: white;
+
+                        }
+                    }
+
+                    small {
+                        display: block;
+                        margin-top: 10px;
+                        color: #444;
+                    }
+                }
+
+                .policyBox {
+                    margin-top: 25px;
+                    padding: 15px;
+                    border-radius: 12px;
+                    background: rgba(255, 255, 255, .6);
+
+                    h4 {
+                        margin-top: 0;
+                        color: #cf0c0c;
+                    }
+
+                    p {
+                        margin-bottom: 0;
+                        font-size: 14px;
+                    }
+                }
+
+                .paymentMethods {
+                    margin-top: 25px;
+
+                    h4 {
+                        color: #cf0c0c;
+                        margin-bottom: 15px;
+                    }
+
+                    .methodGrid {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 15px;
+
+                        button {
+                            padding: 12px 20px;
+                            cursor: pointer;
+                            border: none;
+                            border-radius: 12px;
+                            background: white;
+                            color: #de555f;
+                            font-weight: 600;
+                            transition: 0.3s ease;
+
+                            &:hover {
+                                background: #de555f;
+                                color: white;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .submitSection {
+            margin-top: 25px;
+
+            .submit-btn {
+                padding: 14px 28px;
+                border: none;
+                border-radius: 12px;
+                background: #de555f;
+                color: white;
+                font-size: 16px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: .3s ease;
+
+                &:hover {
+                    background: #c9434d;
+                    transform: translateY(-2px);
+                }
+            }
+        }
+    }
+
+    .bookedSlots {
+        padding: 25px;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(40px);
+        border-radius: 20px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+
+        h2 {
+            margin: 0 0 15px;
+            color: #cf0c0c;
+            font-size: 32px;
+        }
+
+        .bookingItem {
+            padding: 7px 0 7px 7px;
+            margin-bottom: 15px;
+            background: rgb(255 254 255 / 80%);
+            border-radius: 12px;
+
+            h3 {
+                color: #de555f;
+                margin-bottom: 10px;
+                margin-top: 0;
+                font-size: 15px;
+            }
+
+            p {
+                margin: 4px 0;
+                color: #0a0a0a;
+            }
+        }
+    }
+}
+
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgb(0 0 0 / 10%);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modalCard {
+    width: 100%;
+    max-width: 500px;
+    padding: 30px;
+    background: white;
+    backdrop-filter: blur(40px);
+    border-radius: 24px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, .65);
+
+    h2 {
+        margin-bottom: 25px;
+        text-align: center;
+        color: #de555f;
+        font-size: 32px;
+    }
+
+    // Review 
+    .reviewSection {
+        .review-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 6px 0;
+
+            span {
+                color: #000000;
+                width: 140px;
+                font-size: 16px;
+                font-weight: 600;
+            }
+
+            strong {
+                color: #de555f;
+                font-size: 16px;
+                width: 95px;
+                text-align: left;
+            }
+        }
+
+        .modalButtons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+
+            .cancel-btn,
+            .confirm-btn {
+                margin-top: 15px;
+                padding: 14px 20px;
+                border: none;
+                border-radius: 12px;
+                background: #de555f;
+                color: white;
+                font-size: 16px;
+                font-weight: 700;
+                cursor: pointer;
+                transition: 0.5s ease;
+
+                &:hover {
+                    background: #c9434d;
+                    transform: translateY(-2px);
+                }
+            }
+        }
+    }
+}

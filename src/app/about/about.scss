@@ -1,0 +1,87 @@
+.about-container {
+    min-height: 100vh;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg,
+            #f64d5921,
+            #de555f75,
+            #b98ba48c);
+
+    .about-page {
+        width: 100%;
+        max-width: 1000px;
+        padding: 30px;
+        background: linear-gradient(135deg,
+                #f64d5921,
+                #de555f75,
+                #b98ba48c);
+
+        backdrop-filter: blur(25px);
+        border-radius: 20px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+
+        h1 {
+            text-align: center;
+            color: #cf0c0c;
+            margin-bottom: 25px;
+            font-size: 42px;
+        }
+
+        p {
+            color: #333;
+            line-height: 1.4;
+            font-size: 17px;
+            margin-bottom: 18px;
+            text-align: justify;
+        }
+
+        .mission {
+            margin-top: 24px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+
+            h2 {
+                color: #de555f;
+                margin-bottom: 10px;
+                margin-top: 0;
+                font-size: 25px;
+            }
+        }
+
+        .rulesSection {
+            margin-top: 35px;
+
+            h2 {
+                text-align: center;
+                color: #cf0c0c;
+                margin-bottom: 25px;
+                font-size: 32px;
+            }
+        }
+
+        .rulesCard {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(20px);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+
+            ul {
+                margin: 0;
+                padding-left: 25px;
+            }
+
+            li {
+                margin-bottom: 15px;
+                color: #222;
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 1.2;
+                list-style: auto;
+            }
+        }
+    }
+}
