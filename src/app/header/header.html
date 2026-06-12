@@ -13,7 +13,16 @@
 
     <!-- right panel -->
     <div class="navright">
+
+        @if (!isLoggedIn) {
         <button type="button" class="nav-buttons" routerLink="/register">Register</button>
-        <button type="button"  class="nav-buttons" routerLink="/login">Login</button>
+        <button type="button" class="nav-buttons" routerLink="/login">Login</button>
+        }
+
+        @if (isLoggedIn) {
+        <button class="nav-buttons" routerLink="/dashboard">Dashboard</button>
+        <button type="button" class="nav-buttons" routerLink="/logout">Logout</button>
+        }
+
     </div>
 </div>

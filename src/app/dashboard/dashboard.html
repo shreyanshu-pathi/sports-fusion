@@ -96,7 +96,7 @@
 
         <div class="dashboardButtons">
             <button type="button" (click)="openProfileModal()">User Profile</button>
-            <button type="button" routerLink="/logout">Logout</button>
+            <button routerLink="/booking-history">My Bookings</button>
         </div>
 
     </div>
@@ -168,13 +168,6 @@
                     <mat-icon matSuffix>groups</mat-icon>
                 </div>
 
-                <!-- <mat-form-field appearance="outline" class="playerfield">
-                    <mat-label>Number of Players</mat-label>
-                    <input matInput type="number" min="1" [(ngModel)]="selectedPlayers"
-                        (ngModelChange)="onPlayersChange()">
-                    <mat-icon matSuffix>groups</mat-icon>
-                </mat-form-field> -->
-
             </div>
             }
 
@@ -190,20 +183,12 @@
                     <mat-icon class="calendarIcon" (click)="picker.open()">calendar_month</mat-icon>
                     <mat-datepicker #picker></mat-datepicker>
                 </div>
-                <!-- <mat-form-field>
-
-                    <mat-label>Select Date</mat-label>
-                    <input matInput [matDatepicker]="picker" [min]="minDate" [(ngModel)]="selectedDate"
-                        (dateChange)="calculateAmount()">
-                    <mat-hint>MM/DD/YYYY</mat-hint>
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-
-                </mat-form-field> -->
 
                 <div class="optionGrid">
                     @for (slot of slots; track slot) {
-                    <button type="button" [class.active]="selectedSlot === slot" (click)="selectSlot(slot)">
+                    <button type="button" [disabled]="isSlotBooked(selectedCourt, slot)" 
+                    [class.booked]="isSlotBooked(selectedCourt, slot)" 
+                    (click)="selectSlot(slot)">
                         {{ slot }}
                     </button>
                     }
@@ -257,19 +242,6 @@
                         <strong>{{ totalAmount }}</strong>
                     </div>
 
-                    <!-- <div class="packageBox">
-
-                            <h4>{{ packageMessage }}</h4>
-
-                            <ul>
-                                <li>Free Drinking Water</li>
-                                <li>Equipment Assistance</li>
-                                <li>Priority Court Access</li>
-                                <li>Team Booking Support</li>
-                            </ul>
-
-                        </div> -->
-
                     <!-- Coupon Section -->
                     <div class="couponSection">
 
@@ -305,7 +277,7 @@
 
                         <div class="methodGrid">
                             <button type="button" [class.active]="selectedPaymentMethod === 'UPI'"
-                                (click)="selectedPaymentMethod = 'UPI'">UPI</button>
+                                (click)="openUpiQr()">UPI</button>
                             <button type="button" [class.active]="selectedPaymentMethod === 'Card'"
                                 (click)="selectedPaymentMethod = 'Card'">Card</button>
                             <button type="button" [class.active]="selectedPaymentMethod === 'Net Banking'"
@@ -354,6 +326,32 @@
         </div>
 
     </div>
+
+    <!-- UPI QR Modal -->
+    @if(openQr){
+
+    <div class="qrOverlay" (click)="closeQr()">
+
+        <div class="qrPopup" (click)="$event.stopPropagation()">
+
+            <div class="close-btn" (click)="closeQr()">
+                <mat-icon>close</mat-icon>
+            </div>
+
+            <h2>Scan QR Code</h2>
+
+            <qrcode [qrdata]="paymentUrl" [width]="220" [errorCorrectionLevel]="'M'">
+            </qrcode>
+
+            <p class="amount">Amount: ₹{{ totalAmount }}</p>
+
+            <button class="paidBtn" (click)="closeQr()">Done</button>
+
+        </div>
+
+    </div>
+
+    }
 
 
     <!-- Modal -->

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
@@ -7,8 +7,13 @@ import { Router, RouterLink } from '@angular/router';
   templateUrl: './logout.html',
   styleUrl: './logout.scss',
 })
-export class Logout {
+export class Logout implements OnInit {
+  constructor(private router: Router) {}
 
-  router = inject(Router);
+  // router = inject(Router);
+  ngOnInit(): void {
+    localStorage.removeItem('loggedInUser');
+    this.router.navigate(['/logout']);
+  }
 
 }

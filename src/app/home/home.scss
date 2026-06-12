@@ -28,14 +28,15 @@
             h1 {
                 margin-bottom: 30px;
                 font-size: 50px;
-                color: white;
+                color: #de555f;
+                font-weight: 700;
             }
 
             p {
                 font-size: 20px;
                 font-weight: 600;
                 margin: 0 auto 35px;
-                color:  rgba(255,255,255,0.95);
+                color: #4f4f4f; 
                 line-height: 1.7;
             }
 
@@ -88,35 +89,24 @@
                 gap: 70px;
                 margin-top: 12px;
 
+                div {
+                    text-align: center;
+                }
+
                 h3 {
-                    color: #de555f;
-                    font-size: 30px;
+                    color: #e0470f;
+                    font-size: 34px;
+                    font-weight: 700;
                     margin-bottom: 5px;
                 }
 
                 span {
-                    color: #666;
-                    font-size: 14px;
+                    color: #444444;
+                    font-size: 15px;
+                    font-weight: 600;
                 }
             }
 
         }
     }
 }
-
-//  div {
-//         text-align: center;
-//     }
-
-//     h3 {
-//         color: white;
-//         font-size: 34px;
-//         font-weight: 700;
-//         margin-bottom: 6px;
-//     }
-
-//     span {
-//         color: rgba(255,255,255,0.8);
-//         font-size: 15px;
-//     }
-// }

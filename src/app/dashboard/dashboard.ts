@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { GALLERY_IMAGES } from '../constants/constants';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -11,11 +11,13 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { DatePipe } from '@angular/common';
+import { QRCodeComponent } from 'angularx-qrcode';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [RouterLink, FormsModule, MatDialogModule, MatFormFieldModule,
-    MatInputModule, MatDatepickerModule, MatNativeDateModule, MatIconModule, MatSnackBarModule, DatePipe],
+  imports: [FormsModule, MatDialogModule, MatFormFieldModule,
+    MatInputModule, MatDatepickerModule, MatNativeDateModule, MatIconModule,
+    MatSnackBarModule, DatePipe, QRCodeComponent],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss'
 })
@@ -93,7 +95,7 @@ export class Dashboard implements OnInit {
     '10:00 AM',
     '04:00 PM',
     '06:00 PM',
-    '08:00 PM', 
+    '08:00 PM',
     '10:00 PM'
   ];
 
@@ -186,6 +188,16 @@ export class Dashboard implements OnInit {
     this.selectedSlot = slot;
   }
 
+  // Live Slot Availability
+  isSlotBooked(court: string, slot: string): boolean {
+    const allBookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+
+    return allBookings.some((booking: any) =>
+      booking.date === this.selectedDate?.toLocaleDateString() &&
+      booking.court === court &&
+      booking.time === slot
+    );
+  }
   // Review Booking
   submitBooking(): void {
 
@@ -203,7 +215,6 @@ export class Dashboard implements OnInit {
         verticalPosition: 'top',
         panelClass: ['error-snackbar']
       });
-      // alert('Please complete all booking details');
       return;
     }
 
@@ -272,7 +283,6 @@ export class Dashboard implements OnInit {
         verticalPosition: 'top',
         panelClass: ['success-snackbar']
       })
-      // alert('Coupon Applied successfully');
     } else {
 
       this.discountAmount = 0;
@@ -282,7 +292,6 @@ export class Dashboard implements OnInit {
         verticalPosition: 'top',
         panelClass: ['error-snackbar']
       })
-      // alert('Invalid Coupon Code');
     };
   }
   // Cancel Booking
@@ -302,17 +311,26 @@ export class Dashboard implements OnInit {
       price += 250;
     }
 
-    // Weekend Pricing
-    // if (this.selectedDate) {
-    //   const day = new Date(this.selectedDate).getDay();
-
-    //   const isWeekend = day === 0 || day === 6;
-
     if (this.isWeekend) {
       price += price * 0.20;
     }
 
     this.bookingAmount = Math.round(price);
+  }
+
+  // Open UPI QR Code
+  openQr = false;
+
+  paymentUrl = '';
+
+  openUpiQr() {
+    this.selectedPaymentMethod = 'UPI';
+    this.paymentUrl = `upi://pay?pa=shreyanshupathi@upi&pn=Shreyanshu Pathi&am=${this.totalAmount}&cu=INR`;
+    this.openQr = true;
+  }
+
+  closeQr() {
+    this.openQr = false;
   }
 
   // Confirm Booking
@@ -325,7 +343,6 @@ export class Dashboard implements OnInit {
         verticalPosition: 'top',
         panelClass: ['error-snackBar']
       })
-      // alert('Please select a payment method');
       return;
     }
     this.snackBar.open(`${this.totalAmount} paid succesfully`, 'Close', {
@@ -334,7 +351,6 @@ export class Dashboard implements OnInit {
       verticalPosition: 'top',
       panelClass: ['success-snackbar']
     })
-    // alert(`Payment Successfull!\nAmount: ${this.totalAmount}`);
 
     const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
 
@@ -368,7 +384,7 @@ export class Dashboard implements OnInit {
     );
 
     if (bookingExists) {
-      const snackRef = this.snackBar.open('This slot is already booked', 'Close', {
+      this.snackBar.open('This slot is already booked', 'Close', {
         duration: 3000,
         horizontalPosition: 'center',
         verticalPosition: 'top'
@@ -390,8 +406,6 @@ export class Dashboard implements OnInit {
       verticalPosition: 'top',
       panelClass: ['success-snackbar']
     });
-    // alert('Booking Confirmed Successfully');
-
     this.resetBookingForm();
   }
 
@@ -420,15 +434,53 @@ export class Dashboard implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+
       if (!result) return;
+
       this.userProfile = result;
       this.username = result.name;
 
-      localStorage.setItem('loggedInUser', JSON.stringify({
-        ...this.userProfile, memberSince: this.memberSince
-      }));
+      const loggedInUser = JSON.parse(
+        localStorage.getItem('loggedInUser') || '{}'
+      );
+
+      const updatedUser = {
+        ...loggedInUser,
+        ...result,
+        memberSince: this.memberSince
+      };
+
+      // Update current session
+      localStorage.setItem(
+        'loggedInUser',
+        JSON.stringify(updatedUser)
+      );
+
+      // Update registered users
+      const sportUsers = JSON.parse(
+        localStorage.getItem('sportUsers') || '[]'
+      );
+
+      const index = sportUsers.findIndex(
+        (user: any) => user.email === updatedUser.email
+      );
+
+      if (index !== -1) {
+
+        sportUsers[index] = {
+          ...sportUsers[index],
+          ...updatedUser
+        };
+
+        localStorage.setItem(
+          'sportUsers',
+          JSON.stringify(sportUsers)
+        );
+      }
+
+      console.log('Updated User:', updatedUser);
     });
-  };
+  }
 
   // closeProfileModal(): void {
   //   this.showProfileModal = false;
@@ -447,8 +499,8 @@ export class Dashboard implements OnInit {
   }
 
   // Logout
-  logout(): void {
-    localStorage.removeItem('loggedInUser');
-    this.router.navigate(['/logout']);
-  }
+  // logout(): void {
+  //   localStorage.removeItem('loggedInUser');
+  //   this.router.navigate(['/logout']);
+  // }
 }

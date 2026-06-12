@@ -1,0 +1,31 @@
+<div class="history-container">
+
+    <h2>My Booking</h2>
+
+    @if(bookings.length > 0){
+    @for (booking of bookings; track $index) {
+
+    <div class="history-card">
+
+        <h3>{{ booking.sport }}</h3>
+
+        <p><strong>Date:</strong> {{ booking.date }}</p>
+        <p><strong>Time:</strong> {{ booking.time }}</p>
+        <p><strong>Court:</strong> {{ booking.court }}</p>
+        <p><strong>Venue:</strong> {{ booking.venue }}</p>
+        <p><strong>Players:</strong> {{ booking.players }}</p>
+        <p><strong>Amount:</strong> {{ booking.amount }}</p>
+
+    </div>
+
+    }
+    } @else {
+
+        <div class="empty-state">
+            <h3>No Bookings Found</h3>
+            <p>You haven't booked any sports slot yet.</p>
+        </div>
+
+    }
+
+</div>

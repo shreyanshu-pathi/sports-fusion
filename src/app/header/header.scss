@@ -56,9 +56,9 @@ body {
             border: none;
             outline: none;
             border-radius: 10px;
-            background: linear-gradient(135deg, #ee4b57, #de555f, #b98ba4);
+            background: white;
             transition: all 0.3s ease;
-            color: white;
+            color: #de555f;
             font-size: 16px;
             font-weight: 600;
             font-family: sans-serif;
@@ -66,11 +66,8 @@ body {
         }
 
         .nav-buttons:hover {
-            background: linear-gradient(135deg,
-                    #d62839,
-                    #c44569,
-                    #9d6b9f);
-
+            background: #de555f;
+            color: white;
             transform: translateY(-2px);
             box-shadow:
                 0 8px 20px rgba(214, 40, 57, 0.35),

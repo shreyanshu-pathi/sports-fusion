@@ -103,22 +103,23 @@
                 width: 55px;
                 height: 55px;
                 border-radius: 50%;
-                background: rgba(255, 255, 255, .08);
+                background: rgba(255, 255, 255, 0.288);
                 color: white;
-
                 display: flex;
                 justify-content: center;
                 align-items: center;
-
-                font-size: 18px;
                 text-decoration: none;
-
                 transition: all .3s ease;
-            }
 
-            a:hover {
-                background: #de555f;
-                transform: translateY(-4px);
+
+                &:hover {
+                    background: #de555f;
+                    transform: translateY(-4px);
+                }
+
+                i {
+                    font-size: 20px;
+                }
             }
         }
     }

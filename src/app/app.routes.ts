@@ -9,6 +9,7 @@ import { Contact } from './contact/contact';
 import { Logout } from './logout/logout';
 import { Activities } from './activities/activities';
 import { Chatbot } from './chatbot/chatbot';
+import { BookingHistory } from './booking-history/booking-history';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -20,6 +21,7 @@ export const routes: Routes = [
     { path: 'register', component: Register },
     { path: 'login', component: Login },
     { path: 'dashboard', component: Dashboard },
+    { path: 'booking-history', component: BookingHistory },
     { path: 'activities', component: Activities},
     { path: 'logout', component: Logout }
 ];

@@ -9,7 +9,7 @@
         max-width: 500px;
         padding: 30px;
         background: rgb(255 255 255);
-        backdrop-filter: blur(30px);
+        backdrop-filter: blur(25px);
         border-radius: 20px;
         text-align: center;
         box-shadow: 0 15px 40px rgb(0 0 0 / 70%);
@@ -128,7 +128,7 @@
 
                 &:hover {
                     background: #c9434d;
-                    transform: translateY(-2px);
+                    // transform: translateY(-2px);
                 }
             }
         }
@@ -259,17 +259,6 @@
                 z-index: 2;
             }
 
-            // .calendarIcon {
-            //     position: absolute;
-            //     right: 15px;
-            //     top: 48%;
-            //     transform: translateY(-50%);
-            //     color: #de555f;
-            //     cursor: pointer;
-            //     font-size: 22px;
-            //     z-index: 2;
-            // }
-
             .optionGrid {
                 display: flex;
                 flex-wrap: wrap;
@@ -297,6 +286,13 @@
                         background: #de555f;
                         color: white;
                     }
+
+                    .booked {
+                        background: #ef4444;
+                        color: white;
+                        cursor: not-allowed;
+                        opacity: 0.7;
+                    }   
                 }
             }
 
@@ -348,27 +344,6 @@
                         font-size: 17px;
                     }
                 }
-
-                // .packageBox {
-                //     margin-top: 25px;
-                //     padding: 18px;
-                //     background: rgba(255, 255, 255, .6);
-                //     border-radius: 12px;
-
-                //     h4 {
-                //         margin-top: 0;
-                //         color: #cf0c0c;
-                //     }
-
-                //     ul {
-                //         margin: 10px 0 0;
-                //         padding-left: 20px;
-
-                //         li {
-                //             margin-bottom: 8px;
-                //         }
-                //     }
-                // }
 
                 .couponSection {
                     margin-top: 25px;
@@ -586,6 +561,66 @@
                     transform: translateY(-2px);
                 }
             }
+        }
+    }
+
+}
+
+.qrOverlay {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+
+    .qrPopup {
+        position: relative;
+        width: 380px;
+        padding: 25px;
+        background: white;
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        text-align: center;
+
+        h2 {
+            color: #de555f;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            cursor: pointer;
+            font-size: 18px;
+
+            mat-icon {
+                font-size: 24px;
+            }
+        }
+
+        .amount {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .paidBtn {
+            margin-top: 20px;
+            width: 25%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: #de555f;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
         }
     }
 }

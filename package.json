@@ -20,7 +20,11 @@
     "@angular/material": "^21.2.14",
     "@angular/platform-browser": "^21.2.0",
     "@angular/router": "^21.2.0",
+    "@fortawesome/fontawesome-free": "^7.2.0",
+    "@fortawesome/fontawesome-svg-core": "^7.2.0",
+    "@fortawesome/free-solid-svg-icons": "^7.2.0",
     "angular-toastr": "^2.1.1",
+    "angularx-qrcode": "^21.0.5",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
