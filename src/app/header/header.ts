@@ -20,20 +20,34 @@ export class Header implements OnInit {
   ngOnInit() {
 
     this.updateNavbar();
+    // this.checkLoginStatus();
 
     this.isLoggedIn = !!localStorage.getItem('loggedInUser');
 
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
-    this.updateNavbar();
+      this.updateNavbar();
 
+    });
+
+    window.addEventListener('storage', () => {
+      this.updateNavbar();
     });
   }
 
   private updateNavbar() {
     this.isLoggedIn = !!localStorage.getItem('loggedInUser');
     this.isDashboard = this.router.url === '/dashboard';
-    
-  //   console.log('URL:', this.router.url);
-  // console.log('LoggedIn:', this.isLoggedIn);
+
+    //   console.log('URL:', this.router.url);
+    // console.log('LoggedIn:', this.isLoggedIn);
   }
+
+  logout() {
+    localStorage.removeItem('loggedInUser');
+    this.isLoggedIn = false;  
+    this.router.navigate(['/logout']);
+  }
+  // checkLoginStatus(): void {
+  //   this.isLoggedIn = !!localStorage.getItem('loggedInUser');
+  // }
 }

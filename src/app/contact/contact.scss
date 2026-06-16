@@ -24,7 +24,7 @@
     }
 
     .intro {
-        text-align: center;
+        text-align: justify;
         font-size: 17px;
         color: black;
         line-height: 1.5;
@@ -65,7 +65,7 @@
                     a {
                         text-decoration: none;
                         color: black;
-                        font-size: 16px;
+                        font-size: 15px;
                         cursor: pointer;
                         transition: 0.5s ease;
 
@@ -83,12 +83,32 @@
             background: rgba(255, 255, 255, 0.2);
             border-radius: 15px;
 
-            h3 {
-                    color: #de555f;
-                    margin-bottom: 15px;
-                    font-size: 22px;
-                    margin-top: 0;
+            .locationBlock {
+                padding: 10px 0px;
+
+                p {
+                    margin: 4px 0;
                 }
+
+                strong {
+                    color: #de555f;
+                    font-size: 16px;
+                }
+            }
+
+            hr {
+                border: none;
+                height: 1px;
+                background: rgba(0, 0, 0, 0.1);
+                margin: 12px 0;
+            }
+
+            h3 {
+                color: #de555f;
+                margin-bottom: 15px;
+                font-size: 22px;
+                margin-top: 0;
+            }
 
             .socialLinks {
                 display: flex;
@@ -129,7 +149,7 @@
             }
 
 
-            
+
         }
     }
 }

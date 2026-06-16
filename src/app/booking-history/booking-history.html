@@ -1,31 +1,76 @@
 <div class="history-container">
 
-    <h2>My Booking</h2>
+    <div class="historyCard">
 
-    @if(bookings.length > 0){
-    @for (booking of bookings; track $index) {
-
-    <div class="history-card">
-
-        <h3>{{ booking.sport }}</h3>
-
-        <p><strong>Date:</strong> {{ booking.date }}</p>
-        <p><strong>Time:</strong> {{ booking.time }}</p>
-        <p><strong>Court:</strong> {{ booking.court }}</p>
-        <p><strong>Venue:</strong> {{ booking.venue }}</p>
-        <p><strong>Players:</strong> {{ booking.players }}</p>
-        <p><strong>Amount:</strong> {{ booking.amount }}</p>
-
-    </div>
-
-    }
-    } @else {
-
-        <div class="empty-state">
-            <h3>No Bookings Found</h3>
-            <p>You haven't booked any sports slot yet.</p>
+        <div class="topActions">
+            <button class="backBtn" (click)="goBack()">
+                ← Back to Dashboard
+            </button>
         </div>
 
-    }
+        <h1>My Bookings</h1>
+
+        <p class="intro">
+            View all your confirmed sports bookings, venues, courts, and payment details in one place.
+        </p>
+
+        @if(bookings.length > 0){
+
+        <div class="bookingGrid">
+
+            @for (booking of bookings; track $index) {
+
+            <div class="history-card">
+
+                <div class="cardHeader">
+                    <h3>{{ booking.sport }}</h3>
+
+                    <span class="status">
+                        Confirmed
+                    </span>
+                </div>
+
+                <div class="bookingDetails">
+
+                    <p><strong>📅 Date:</strong>{{ booking.date }}</p>
+
+                    <p><strong>⏰ Time:</strong>{{ booking.time }}</p>
+
+                    <p><strong>🏟 Court:</strong>{{ booking.court }}</p>
+
+                    <p><strong>📍 Venue:</strong>{{ booking.venue }}</p>
+
+                    <p><strong>👥 Players:</strong>{{ booking.players }}</p>
+
+                    <p><strong>💰 Amount:</strong>₹{{ booking.amount }}</p>
+
+                    @if(canCancelBooking(booking)) {
+                    <button class="cancelBtn" (click)="cancelBooking(booking)">Cancel Booking</button>
+                    <button class="rescheduleBtn" (click)="rescheduleBooking(booking)">Reschedule Booking</button>
+                    } @else {
+                    <span class="cancelDisabled">Cancellation Closed</span>
+                    }
+                </div>
+
+            </div>
+
+            }
+
+        </div>
+
+        } @else {
+
+        <div class="empty-state">
+
+            <div class="emptyIcon">📋</div>
+
+            <h3>No Bookings Found</h3>
+            <p>You haven't booked any sports slot yet.s</p>
+
+        </div>
+
+        }
+
+    </div>
 
 </div>

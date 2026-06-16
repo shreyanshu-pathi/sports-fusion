@@ -10,6 +10,11 @@ import { Logout } from './logout/logout';
 import { Activities } from './activities/activities';
 import { Chatbot } from './chatbot/chatbot';
 import { BookingHistory } from './booking-history/booking-history';
+import { Admin } from './admin/admin';
+import { Admindashboard } from './admindashboard/admindashboard';
+import { AdminUsers } from './admin-users/admin-users';
+import { AdminBookings } from './admin-bookings/admin-bookings';
+import { AdminRevenue } from './admin-revenue/admin-revenue';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -20,8 +25,21 @@ export const routes: Routes = [
     { path: 'contact', component: Contact },
     { path: 'register', component: Register },
     { path: 'login', component: Login },
-    { path: 'dashboard', component: Dashboard },
-    { path: 'booking-history', component: BookingHistory },
+    { path: 'dashboard', component: Dashboard, 
+        children: [
+            { path: 'bookinghistory', component: BookingHistory },
+        ]
+     },
+    // { path: 'bookinghistory', component: BookingHistory },
+    { path: 'admin', component: Admin, 
+        children: [
+            { path: '', redirectTo: 'admindashboard', pathMatch: 'full' },
+            { path: 'admindashboard', component: Admindashboard },
+            { path: 'adminusers', component: AdminUsers },
+            { path:'adminbookings', component: AdminBookings },
+            { path: 'adminrevenue', component: AdminRevenue }
+        ]
+    },
     { path: 'activities', component: Activities},
     { path: 'logout', component: Logout }
 ];

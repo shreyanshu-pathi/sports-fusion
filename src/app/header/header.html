@@ -21,7 +21,7 @@
 
         @if (isLoggedIn) {
         <button class="nav-buttons" routerLink="/dashboard">Dashboard</button>
-        <button type="button" class="nav-buttons" routerLink="/logout">Logout</button>
+        <button type="button" class="nav-buttons" (click)="logout()">Logout</button>
         }
 
     </div>

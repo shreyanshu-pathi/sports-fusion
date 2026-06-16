@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { GALLERY_IMAGES } from '../constants/constants';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -15,9 +15,10 @@ import { QRCodeComponent } from 'angularx-qrcode';
 
 @Component({
   selector: 'app-dashboard',
+  standalone: true,
   imports: [FormsModule, MatDialogModule, MatFormFieldModule,
     MatInputModule, MatDatepickerModule, MatNativeDateModule, MatIconModule,
-    MatSnackBarModule, DatePipe, QRCodeComponent],
+    MatSnackBarModule, DatePipe, QRCodeComponent, RouterLink, RouterOutlet],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss'
 })
@@ -374,6 +375,8 @@ export class Dashboard implements OnInit {
       localStorage.getItem('bookings') || '[]'
     );
 
+
+
     // Existing Bookings
     const bookingExists = bookings.some(
       (b: any) =>
@@ -392,9 +395,31 @@ export class Dashboard implements OnInit {
       return;
     }
 
-    bookings.push(booking);
+    const oldBooking = JSON.parse(localStorage.getItem('rescheduleBooking') || 'null');
 
-    localStorage.setItem('bookings', JSON.stringify(bookings));
+    if (oldBooking) {
+
+      const updatedBookings = bookings.filter(
+        (b: any) =>
+          !(
+            b.userEmail === oldBooking.userEmail &&
+            b.date === oldBooking.date &&
+            b.time === oldBooking.time &&
+            b.court === oldBooking.court
+          )
+      );
+
+      updatedBookings.push(booking);
+
+      localStorage.setItem('bookings', JSON.stringify(updatedBookings));
+
+      localStorage.removeItem('rescheduleBooking');
+
+    } else {
+      bookings.push(booking);
+      localStorage.setItem('bookings', JSON.stringify(bookings));
+      
+    }
 
     this.loadBookings();
 

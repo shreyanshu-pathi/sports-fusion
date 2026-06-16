@@ -81,6 +81,7 @@
     </div> 
     }-->
 
+    <router-outlet></router-outlet>
     <!-- Header -->
     <div class="dashboardHeader">
 
@@ -96,7 +97,7 @@
 
         <div class="dashboardButtons">
             <button type="button" (click)="openProfileModal()">User Profile</button>
-            <button routerLink="/booking-history">My Bookings</button>
+            <button routerLink="bookinghistory">My Bookings</button>
         </div>
 
     </div>
@@ -424,5 +425,7 @@
     </div>
 
     }
+
+    
 
 </div>

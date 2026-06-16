@@ -1,0 +1,15 @@
+<div class="adminHeader">
+
+    <h1>Admin Panel</h1>
+
+    <div class="adminTabs">
+        <button routerLink="admindashboard" routerLinkActive="active">Dashboard</button>
+        <button routerLink="adminusers" routerLinkActive="active">Users</button>
+        <button routerLink="adminbookings" routerLinkActive="active">Bookings</button>
+        <button routerLink="adminrevenue" routerLinkActive="active">Revenue</button>
+    </div>
+
+    <div class="adminContent">
+        <router-outlet></router-outlet>
+    </div>
+</div>

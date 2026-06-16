@@ -57,6 +57,22 @@ export class Login {
     const email = this.loginForm.value.email;
     const password = this.loginForm.value.password;
 
+    // Admin Credentials
+    if (
+      email === 'admin@sportsFusion.com' &&
+      password === 'Admin@12345'
+    ) {
+      localStorage.setItem('isAdmin', 'true');
+
+      this.snackBar.open('Login Successfull', 'Close', {
+        duration: 2000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        panelClass: ['success-snackbar']
+      });
+      return;
+    }
+
     // Get users from localStorage
     const sportUsers = JSON.parse(localStorage.getItem('sportUsers') || '[]');
 
