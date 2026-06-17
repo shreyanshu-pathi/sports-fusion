@@ -1,1 +1,41 @@
-<p>admin-users works!</p>
+<div class="usersContainer">
+
+    <h2>Registered Users</h2>
+
+    <button class="addBtn" (click)="addUser()">Add user</button>
+
+    @if(users.length > 0){
+    <div class="tableWrapper">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>MemberSince</th>
+                    <th>Total Bookings</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @for (user of users; track user.email) {
+                <tr>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.phone }}</td>
+                    <td>{{ user.memberSince }}</td>
+                    <td>{{ getBookingCount(user.email) }}</td>
+                    <td><button class="deleteBtn" (click)="deleteUser(user)">Delete User</button></td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    } @else {
+    <div class="emptyState">
+        No registered users found.
+    </div>
+    }
+</div>

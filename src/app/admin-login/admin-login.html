@@ -1,0 +1,29 @@
+<div class="adminLoginContainer">
+
+    <div class="adminLoginCard">
+
+        <h1>Admin Login</h1>
+
+        <form [formGroup]="adminForm">
+
+            <input
+                type="email"
+                placeholder="Enter Email"
+                formControlName="email">
+
+            <input
+                type="password"
+                placeholder="Enter Password"
+                formControlName="password">
+
+            <button
+                type="button"
+                (click)="loginAdmin()">
+                Login
+            </button>
+
+        </form>
+
+    </div>
+
+</div>

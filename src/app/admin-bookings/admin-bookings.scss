@@ -1,0 +1,93 @@
+.bookingContainer {
+    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    h2 {
+        text-align: center;
+        font-size: 32px;
+        color: #cf0c0c;
+        margin-bottom: 25px;
+    }
+
+    .statsCard {
+        width: fit-content;
+        margin: 0 auto 25px;
+        background: rgba(255, 255, 255, .2);
+        backdrop-filter: blur(15px);
+        padding: 2px 25px;
+        border-radius: 14px;
+
+        h3 {
+            margin: 7px;
+            color: #de555f;
+        }
+    }
+
+    .filterSection {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 25px;
+
+        select {
+            padding: 12px 16px;
+            border-radius: 10px;
+            border: none;
+            min-width: 180px;
+            font-size: 15px;
+        }
+    }
+
+    .tableWrapper {
+        overflow-x: auto;
+        background: rgba(255, 255, 255, .18);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+
+            th {
+                padding: 17px;
+                text-align: left;
+                color: #d32f2f;
+                font-size: 18px;
+                font-weight: 600;
+            }
+
+            tr:hover {
+                background: rgba(255, 255, 255, .1);
+            }
+
+            td {
+                padding: 17px;
+                color: #040404;
+                font-size: 15px;
+                border-top: 1px solid rgba(255, 255, 255, 0.15);
+
+                .cancelBtn {
+                    padding: 10px 12px;
+                    font-size: 13px;
+                    font-weight: 600;
+                    border: none;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    color: white;
+                    background: linear-gradient(135deg, #ff5252, #d32f2f);
+                    transition: 0.3s ease;
+
+                    &:hover {
+                        transform: translateY(-2px);
+                    }
+                }
+            }
+        }
+    }
+    
+    .emptyState {
+        text-align: center;
+        padding: 40px;
+        color: #666;
+    }
+}

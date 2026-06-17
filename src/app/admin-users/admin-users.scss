@@ -1,0 +1,100 @@
+.usersContainer {
+    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    h2 {
+        text-align: center;
+        font-size: 32px;
+        color: #cf0c0c;
+        margin-bottom: 25px;
+    }
+
+    .addBtn {
+        display: block;
+        margin: 0 auto 25px;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        background: linear-gradient(135deg, #de555f, #cf0c0c);
+        color: white;
+        transition: 0.3s ease;
+
+        &:hover {
+            transform: translateY(-3px);
+        }
+    }
+
+    .tableWrapper {
+        overflow-x: auto;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.18);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+
+            thead {
+                background: rgba(222, 85, 95, 0.15);
+
+                th {
+                    padding: 17px;
+                    text-align: left;
+                    color: #d32f2f;
+                    font-size: 18px;
+                    font-weight: 600;
+                }
+            }
+
+            tbody {
+                tr {
+                    transition: 0.3s ease;
+
+                    &:hover {
+                        background: rgba(255, 255, 255, 0.15);
+                    }
+                }
+
+                td {
+                    padding: 20px;
+                    color: #040404;
+                    font-size: 16px;
+                    border-top: 1px solid rgba(255, 255, 255, 0.15);
+
+                    .deleteBtn {
+                        padding: 10px 12px;
+                        font-size: 13px;
+                        font-weight: 600;
+                        border: none;
+                        border-radius: 10px;
+                        cursor: pointer;
+                        color: white;
+                        background: linear-gradient(135deg, #ff5252, #d32f2f);
+                        transition: 0.3s ease;
+
+                        &:hover {
+                            transform: translateY(-2px);
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+
+    .emptyState {
+        text-align: center;
+        padding: 40px;
+        font-size: 18px;
+        color: #666;
+        background: rgba(255, 255, 255, 0.18);
+        backdrop-filter: blur(20px);
+        border-radius: 18px;
+    }
+}

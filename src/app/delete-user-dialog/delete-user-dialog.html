@@ -1,0 +1,13 @@
+<div class="deleteDialog">
+
+    <h2>Delete User</h2>
+
+    <p>Are you sure you want to delete
+        <strong>{{ data.name }}</strong> ?
+    </p>
+
+    <div class="dialogButtons">
+        <button class="cancelBtn" (click)="cancel()">Cancel</button>
+        <button class="deleteBtn" (click)="confirmDelete()">Delete</button>
+    </div>
+</div>

@@ -36,5 +36,7 @@ export const GALLERY_IMAGES = {
         '/images/v3.jfif',
     ],
 
+    
+
 }
 

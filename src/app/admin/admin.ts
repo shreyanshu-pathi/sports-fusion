@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
 
 @Component({
   selector: 'app-admin',
@@ -7,4 +7,19 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
   templateUrl: './admin.html',
   styleUrl: './admin.scss',
 })
-export class Admin {}
+export class Admin {
+
+  constructor(private router: Router){}
+
+  ngOnInIt(): void {
+    const isAdminLoggedIn = localStorage.getItem('adminLoggedIn') === 'true';
+    if(!isAdminLoggedIn) {
+      this.router.navigate(['/admin-login']);
+    }
+  }
+
+  logoutAdmin(): void {
+    localStorage.removeItem('adminLoggedIn');
+    this.router.navigate(['/login']);
+  }
+}

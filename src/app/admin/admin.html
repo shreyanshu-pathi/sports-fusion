@@ -1,12 +1,16 @@
-<div class="adminHeader">
+<div class="adminPage">
+    <div class="adminHeader">
 
-    <h1>Admin Panel</h1>
+        <h1>Admin Panel</h1>
 
-    <div class="adminTabs">
-        <button routerLink="admindashboard" routerLinkActive="active">Dashboard</button>
-        <button routerLink="adminusers" routerLinkActive="active">Users</button>
-        <button routerLink="adminbookings" routerLinkActive="active">Bookings</button>
-        <button routerLink="adminrevenue" routerLinkActive="active">Revenue</button>
+        <div class="adminTabs">
+            <button routerLink="admindashboard" routerLinkActive="active">Dashboard</button>
+            <button routerLink="adminusers" routerLinkActive="active">Users</button>
+            <button routerLink="adminbookings" routerLinkActive="active">Bookings</button>
+            <button routerLink="adminrevenue" routerLinkActive="active">Revenue</button>
+        </div>
+
+        <button class="logoutBtn" (click)="logoutAdmin()">Logout</button>
     </div>
 
     <div class="adminContent">

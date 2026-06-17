@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Sportservice } from '../sportservice';
 import { RouterLink } from '@angular/router';
@@ -46,6 +46,19 @@ export class Login {
     });
   }
 
+  ngOnInIt(): void{
+    const isUserLoggedIn = !!localStorage.getItem('loggedInUser');
+    const isAdminLoggedIn = localStorage.getItem('adminLoggedIn') === 'true';
+
+    if(isUserLoggedIn) {
+      this.router.navigate(['/dashboard']);
+    }
+
+    if(isAdminLoggedIn){
+      this.router.navigate(['/admin']);
+    }
+  }
+  
   onLogin(): void {
 
     this.submitted = true;
@@ -62,7 +75,8 @@ export class Login {
       email === 'admin@sportsFusion.com' &&
       password === 'Admin@12345'
     ) {
-      localStorage.setItem('isAdmin', 'true');
+      localStorage.setItem('adminLoggedIn', 'true');
+      this.router.navigate(['/admin']);
 
       this.snackBar.open('Login Successfull', 'Close', {
         duration: 2000,

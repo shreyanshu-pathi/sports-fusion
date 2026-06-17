@@ -77,7 +77,7 @@ export class Dashboard implements OnInit {
   ];
 
   venues = [
-    'Jubliee Hills',
+    'Jubilee Hills',
     'Madhapur',
     'Gachibowli'
   ];
@@ -395,6 +395,7 @@ export class Dashboard implements OnInit {
       return;
     }
 
+    // Reschedule Booking
     const oldBooking = JSON.parse(localStorage.getItem('rescheduleBooking') || 'null');
 
     if (oldBooking) {
@@ -418,7 +419,7 @@ export class Dashboard implements OnInit {
     } else {
       bookings.push(booking);
       localStorage.setItem('bookings', JSON.stringify(bookings));
-      
+
     }
 
     this.loadBookings();

@@ -1,0 +1,44 @@
+.deleteDialog {
+    text-align: left;
+    padding: 25px;
+
+    h2 {
+        margin: 0 0 15px;
+        // color: #cf0c0c;
+        font-size: 28px;
+    }
+
+    p {
+        color: #333;
+        line-height: 1.6;
+        margin-bottom: 10px;
+        font-size: 16px;
+    }
+
+    .dialogButtons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 15px;
+        margin-top: 20px;
+
+        button {
+            border: none;
+            cursor: pointer;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cancelBtn {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(15px);
+            color: #333;
+        }
+
+        .deleteBtn {
+            background: #e53935;
+            color: white;
+        }
+    }
+}

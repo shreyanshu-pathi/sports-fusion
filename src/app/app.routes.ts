@@ -15,6 +15,7 @@ import { Admindashboard } from './admindashboard/admindashboard';
 import { AdminUsers } from './admin-users/admin-users';
 import { AdminBookings } from './admin-bookings/admin-bookings';
 import { AdminRevenue } from './admin-revenue/admin-revenue';
+import { AdminLogin } from './admin-login/admin-login';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -25,12 +26,13 @@ export const routes: Routes = [
     { path: 'contact', component: Contact },
     { path: 'register', component: Register },
     { path: 'login', component: Login },
+    { path: 'admin-login', component: AdminLogin },
     { path: 'dashboard', component: Dashboard, 
-        children: [
-            { path: 'bookinghistory', component: BookingHistory },
-        ]
+        // children: [
+        //     { path: 'bookinghistory', component: BookingHistory },
+        // ]
      },
-    // { path: 'bookinghistory', component: BookingHistory },
+    { path: 'bookinghistory', component: BookingHistory },
     { path: 'admin', component: Admin, 
         children: [
             { path: '', redirectTo: 'admindashboard', pathMatch: 'full' },

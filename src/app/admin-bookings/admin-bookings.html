@@ -1,1 +1,62 @@
-<p>admin-bookings works!</p>
+<div class="bookingContainer">
+
+    <h2>All Bookings</h2>
+
+    <div class="statsCard">
+        <h3>Total Bookings: {{ filteredBookings.length }}</h3>
+    </div>
+
+    <div class="filterSection">
+        <select [(ngModel)]="selectedSport" (change)="filterBookings()">
+            <option value="">All sports</option>
+            <option value="Cricket">Cricket</option>
+            <option value="Badminton">Badminton</option>
+            <option value="Football">Football</option>
+            <option value="Volleyball">Volleyball</option>
+            <option value="Basketball">Basketball</option>
+            <option value="Tennis">Tennis</option>
+        </select>
+    </div>
+
+    @if(filteredBookings.length > 0){
+    <div class="tableWrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Sport</th>
+                    <th>venue</th>
+                    <th>Court</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Amount</th>
+                    <th>Payment Method</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @for(booking of filteredBookings; track $index){
+                <tr>
+                    <td>{{ booking.username }}</td>
+                    <td>{{ booking.sport }}</td>
+                    <td>{{ booking.venue }}</td>
+                    <td>{{ booking.court }}</td>
+                    <td>{{ booking.date }}</td>
+                    <td>{{ booking.time }}</td>
+                    <td>{{ booking.amount }}</td>
+                    <td>{{ booking.paymentMethod }}</td>
+                    <td><button class="cancelBtn" (click)="cancelBooking(booking)">Cancel</button></td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    } @else {
+
+    <div class="emptyState">
+        No bookings found.
+    </div>
+
+    }
+</div>

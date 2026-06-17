@@ -1,18 +1,23 @@
-<div class="adminGrid">
+<div class="dashboardGrid">
 
-    <div class="adminCard" routerLink="adminusers">
-        <h2>Users</h2>
-        <p>Manage registered users</p>
+    <div class="statCard" >
+        <h2>Total Users</h2>
+        <h1>{{ totalUsers }}</h1>
     </div>
 
-    <div class="adminCard" routerLink="adminbookings">
-        <h2>Bookings</h2>
-        <p>View all bookings</p>
+    <div class="statCard">
+        <h2>Total Bookings</h2>
+        <h1>{{ totalBookings }}</h1>
     </div>
 
-    <div class="adminCard" routerLink="adminrevenue">
+    <div class="statCard">
+        <h2>Today's Bookings</h2>
+        <h1>{{ todayBookings }}</h1>
+    </div>
+
+    <div class="statCard">
         <h2>Revenue</h2>
-        <p>Track earnings</p>
+        <h1>{{ totalRevenue }}</h1>
     </div>
 
 </div>
