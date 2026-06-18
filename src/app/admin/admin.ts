@@ -20,6 +20,6 @@ export class Admin {
 
   logoutAdmin(): void {
     localStorage.removeItem('adminLoggedIn');
-    this.router.navigate(['/login']);
+    this.router.navigate(['/admin-login']);
   }
 }

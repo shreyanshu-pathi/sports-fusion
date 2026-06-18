@@ -14,19 +14,17 @@ export class Header implements OnInit {
 
   isLoggedIn = false;
   isDashboard = false;
+  isAdminLoggedIn = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
 
     this.updateNavbar();
-    // this.checkLoginStatus();
 
-    this.isLoggedIn = !!localStorage.getItem('loggedInUser');
-
+    // this.isLoggedIn = !!localStorage.getItem('loggedInUser');
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
       this.updateNavbar();
-
     });
 
     window.addEventListener('storage', () => {
@@ -38,16 +36,24 @@ export class Header implements OnInit {
     this.isLoggedIn = !!localStorage.getItem('loggedInUser');
     this.isDashboard = this.router.url === '/dashboard';
 
+    this.isAdminLoggedIn = localStorage.getItem('adminLoggedIn') === 'true';
+
     //   console.log('URL:', this.router.url);
     // console.log('LoggedIn:', this.isLoggedIn);
+
+    console.log('isLoggedIn:', this.isLoggedIn);
+  console.log('isAdminLoggedIn:', this.isAdminLoggedIn);
   }
 
-  logout() {
+  logout(): void {
     localStorage.removeItem('loggedInUser');
     this.isLoggedIn = false;  
     this.router.navigate(['/logout']);
   }
-  // checkLoginStatus(): void {
-  //   this.isLoggedIn = !!localStorage.getItem('loggedInUser');
+  
+  // adminLogout(): void {
+  //   localStorage.removeItem('adminLoggedIn');
+  //   this.isAdminLoggedIn = false;
+  //   this.router.navigate(['/admin-login']);
   // }
 }

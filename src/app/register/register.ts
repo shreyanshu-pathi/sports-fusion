@@ -82,10 +82,22 @@ export class Register {
 
     const data = this.registerForm.value;
 
+    // Admin credentials
+    const email = this.registerForm.value.email?.trim().toLowerCase();
+    if(email === 'admin@sportsfusion.com') {
+      this.snackBar.open('This email is reserved for administrator', 'Close', {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        panelClass: ['error-snackbar']
+      })
+      return;
+    }
+
     //Get existing users
     const sportUsers = this.get('sportUsers') || [];
 
-    const emailExists = sportUsers.some((user: any) => user.email === data.email);
+    const emailExists = sportUsers.some((user: any) => user.email?.trim().toLowerCase() === data.email?.trim().toLowerCase());
 
     // Checks if email exists
     if (emailExists) {

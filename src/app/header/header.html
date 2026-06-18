@@ -4,34 +4,35 @@
 
     <!-- left panel -->
     <div class="navleft">
-        <a routerLink="/home" routerLinkActive="active">Home</a>
+        
+        <ul class="navMenu">
+            <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+            <li><a routerLink="/gallery" routerLinkActive="active">Gallery</a></li>
+            <li><a routerLink="/activities" routerLinkActive="active">Activities</a></li>
+            <li><a routerLink="/about" routerLinkActive="active">About</a></li>
+            <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
+        </ul>
+
+        <!-- <a routerLink="/home" routerLinkActive="active">Home</a>
         <a routerLink="/gallery" routerLinkActive="active">Gallery</a>
         <a routerLink="/activities" routerLinkActive="active">Activities</a>
         <a routerLink="/about" routerLinkActive="active">About</a>
-        <a routerLink="/contact" routerLinkActive="active">Contact</a>
+        <a routerLink="/contact" routerLinkActive="active">Contact</a> -->
     </div>
 
     <!-- right panel -->
     <div class="navright">
 
-        
-
-        @if (!isLoggedIn) {
+        @if (!isLoggedIn && !isAdminLoggedIn) {
         <button type="button" class="nav-buttons" routerLink="/register">Register</button>
         <button type="button" class="nav-buttons" routerLink="/login">Login</button>
+        <!-- <button type="button" class="nav-buttons adminBtn" routerLink="/admin-login">Admin</button> -->
         }
 
         @if (isLoggedIn) {
         <button class="nav-buttons" routerLink="/dashboard">Dashboard</button>
         <button type="button" class="nav-buttons" (click)="logout()">Logout</button>
         }
-
-        <button
-        type="button"
-        class="nav-buttons adminBtn"
-        routerLink="/admin-login">
-        Admin
-    </button>
-
+        <button type="button" class="nav-buttons adminBtn" routerLink="/admin-login">Admin</button>
     </div>
 </div>

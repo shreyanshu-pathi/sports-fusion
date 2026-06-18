@@ -1,41 +1,127 @@
+<!-- <div class="tableContainer">
+
+    <table mat-table [dataSource]="users" class="mat-elevation-z2">
+
+        <!-- Name -->
+        <!-- <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let user">{{ user.name }}</td>
+        </ng-container> -->
+
+        <!-- Email -->
+         <!-- <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef>Email</th>
+            <td mat-cell *matCellDef="let user">{{ user.email }}</td>
+        </ng-container> -->
+
+        <!-- Phone -->
+         <!-- <ng-container matColumnDef="phone">
+            <th mat-header-cell *matHeaderCellDef>Phone</th>
+            <td mat-cell *matCellDef="let user">{{ user.phone }}</td>
+        </ng-container> -->
+
+        <!-- Total Bookinga -->
+         <!-- <ng-container matColumnDef="totalBookings">
+            <th mat-header-cell *matHeaderCellDef>Total Bookings</th>
+            <td mat-cell *matCellDef="let user">{{user.totalBookings}}</td>
+        </ng-container> -->
+
+        <!-- Actions -->
+         <!-- <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let user">
+                <button mat-icon-button color="warn" (click)="deleteUser(user)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table> 
+
+</div> -->
+
 <div class="usersContainer">
 
-    <h2>Registered Users</h2>
+    <div class="glassCard">
 
-    <button class="addBtn" (click)="addUser()">Add user</button>
+        <h2>Registered Users</h2>
 
-    @if(users.length > 0){
-    <div class="tableWrapper">
+        <table mat-table [dataSource]="users" class="glassTable" matSort>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>MemberSince</th>
-                    <th>Total Bookings</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
+            <!-- Name -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+                <td mat-cell *matCellDef="let user">
+                    {{ user.name }}
+                </td>
+            </ng-container>
 
-            <tbody>
-                @for (user of users; track user.email) {
-                <tr>
-                    <td>{{ user.name }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.phone }}</td>
-                    <td>{{ user.memberSince }}</td>
-                    <td>{{ getBookingCount(user.email) }}</td>
-                    <td><button class="deleteBtn" (click)="deleteUser(user)">Delete User</button></td>
-                </tr>
-                }
-            </tbody>
+            <!-- Email -->
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef>Email</th>
+                <td mat-cell *matCellDef="let user">
+                    {{ user.email }}
+                </td>
+            </ng-container>
+
+            <!-- Phone -->
+            <ng-container matColumnDef="phone">
+                <th mat-header-cell *matHeaderCellDef>Phone</th>
+                <td mat-cell *matCellDef="let user">
+                    {{ user.phone }}
+                </td>
+            </ng-container>
+
+            <!-- Member Since -->
+            <ng-container matColumnDef="memberSince">
+                <th mat-header-cell *matHeaderCellDef>Member Since</th>
+                <td mat-cell *matCellDef="let user">
+                    {{ user.memberSince }}
+                </td>
+            </ng-container>
+
+            <!-- Total Bookings -->
+            <ng-container matColumnDef="totalBookings">
+                <th mat-header-cell *matHeaderCellDef>Bookings</th>
+                <td mat-cell *matCellDef="let user">
+
+                    <span class="bookingBadge">
+                        {{ user.totalBookings }}
+                    </span>
+
+                </td>
+            </ng-container>
+
+            <!-- Actions -->
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>Action</th>
+
+                <td mat-cell *matCellDef="let user">
+
+                    <button
+                        class="deleteBtn"
+                        (click)="deleteUser(user.email)">
+
+                        Delete
+
+                    </button>
+
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+            <tr
+                mat-row
+                *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+
         </table>
+
     </div>
-    } @else {
-    <div class="emptyState">
-        No registered users found.
-    </div>
-    }
+
 </div>

@@ -1,103 +1,153 @@
 .adminLoginContainer {
-    min-height: 100vh;
+    min-height: 75vh;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 30px 15px;
-
-    background: linear-gradient(
-        135deg,
-        rgb(246 77 89 / 29%),
-        rgb(222 85 95 / 45%),
-        rgb(185 139 164 / 88%)
-    );
-}
-
-.adminLoginCard {
-    width: 100%;
-    max-width: 450px;
-
-    padding: 35px;
-
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(25px);
-
-    border-radius: 20px;
-
-    border: 1px solid rgba(255, 255, 255, 0.2);
-
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-
-    h1 {
-        text-align: center;
-        color: #cf0c0c;
-        margin-bottom: 30px;
-        font-size: 36px;
-    }
+    background: linear-gradient(135deg,
+            #f64d5921,
+            #de555f75,
+            #b98ba48c);
 
     form {
-        display: flex;
-        flex-direction: column;
-        gap: 18px;
-    }
-
-    input {
         width: 100%;
-        padding: 14px 16px;
+        max-width: 425px;
+        padding: 30px;
+        background: rgba(255, 255, 255, 0.44);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        border-radius: 24px;
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
 
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        border-radius: 12px;
-
-        background: rgba(255, 255, 255, 0.25);
-        backdrop-filter: blur(10px);
-
-        font-size: 15px;
-        color: #333;
-
-        outline: none;
-
-        transition: all 0.3s ease;
-
-        &:focus {
-            border-color: #de555f;
-            box-shadow: 0 0 10px rgba(222, 85, 95, 0.25);
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1e293b;
+            font-size: 40px;
+            font-weight: 700;
         }
 
-        &::placeholder {
-            color: #666;
+        .adminLoginField {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 16px;
+
+            label {
+                margin-bottom: 8px;
+                color: #334155;
+                font-size: 17px;
+                font-weight: 600;
+            }
+
+            .input-wrapper {
+                position: relative;
+                width: 100%;
+
+                input {
+                    width: 100%;
+                    height: 45px;
+                    padding: 0 45px 0 15px;
+                    border: 1px solid #cbd5e1;
+                    border-radius: 12px;
+                    box-sizing: border-box;
+                    background: rgba(255, 255, 255, 0.8);
+                    color: #1e293b;
+                    font-size: 15px;
+                    outline: none;
+                    transition: 0.3s ease;
+
+                    &::placeholder {
+                        color: #94a3b8;
+                    }
+
+                    &:focus {
+                        border-color: #2563eb;
+                        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+                    }
+
+                    &.ng-invalid.ng-touched {
+                        border-color: #ef4444;
+                    }
+
+                    &.ng-valid.ng-touched {
+                        border-color: #22c55e;
+                    }
+                }
+
+                mat-icon {
+                    position: absolute;
+                    right: 12px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    color: #de555f;
+                    font-size: 20px;
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+
+            .error {
+                min-height: 18px;
+                margin-top: 4px;
+                font-size: 13px;
+                color: #dc2626;
+                font-weight: 500;
+                display: block;
+            }
         }
-    }
 
-    button {
-        margin-top: 10px;
-        padding: 14px;
+        .forgotPassword {
+            text-align: left;
+            margin-top: 8px;
 
-        border: none;
-        border-radius: 12px;
+            a {
+                color: #334155;
+                cursor: pointer;
+                text-decoration: none;
+                font-size: 15px;
 
-        cursor: pointer;
-
-        background: linear-gradient(
-            135deg,
-            #f64d59,
-            #de555f
-        );
-
-        color: white;
-        font-size: 16px;
-        font-weight: 600;
-
-        transition: all 0.3s ease;
-
-        box-shadow: 0 6px 15px rgba(222, 85, 95, 0.3);
-
-        &:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(222, 85, 95, 0.4);
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
         }
 
-        &:active {
-            transform: scale(0.98);
+        .adminLoginError {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 10px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #dc2626;
+            font-size: 14px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .adminBtn {
+            width: 100%;
+            height: 50px;
+            margin-top: 18px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #e10c1c, rgb(225 37 50 / 92%), #f00830);
+            color: white;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 20px rgba(88, 28, 178, 0.25);
+            }
+
+            &:active {
+                transform: scale(0.98);
+            }
+
+            &:disabled {
+                opacity: 0.6;
+                cursor: not-allowed;
+            }
         }
     }
 }

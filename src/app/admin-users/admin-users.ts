@@ -1,12 +1,18 @@
-import { Component, inject, OnInit, resource } from '@angular/core';
+import { Component, inject, OnInit, resource, viewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteUserDialog } from '../delete-user-dialog/delete-user-dialog';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { ViewChild } from '@angular/core';
 
 
 @Component({
   selector: 'app-admin-users',
-  imports: [MatSnackBarModule],
+  imports: [MatSnackBarModule, MatTableModule, MatButtonModule, MatIconModule, MatSort],
   templateUrl: './admin-users.html',
   styleUrl: './admin-users.scss',
 })
@@ -16,9 +22,48 @@ export class AdminUsers implements OnInit {
   snackBar = inject(MatSnackBar);
   users: any[] = [];
 
+  displayedColumns: string[] = [
+    'name',
+    'email',
+    'phone',
+    // 'memberSince',
+    'totalBookings',
+    'actions'
+  ]
+
+  dataSource = new MatTableDataSource<any>();
+  @ViewChild(MatSort) sort!: MatSort;
+
+
   ngOnInit(): void {
-    this.users = JSON.parse(localStorage.getItem('sportUsers') || '[]');
+    this.loadUsers();
+    const users = JSON.parse(
+      localStorage.getItem('sportUsers') || '[]'
+    );
+    this.dataSource.data = users;
   }
+
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
+  }
+
+  loadUsers(): void {
+    const users = JSON.parse(localStorage.getItem('sportUsers') || '[]'
+    );
+
+    const bookings = JSON.parse(localStorage.getItem('bookings') || '[]'
+    );
+
+    this.users = users.map((user: any) => ({
+      ...user,
+      memberSince: user.memberSince || 'N/A',
+      totalBookings: bookings.filter((booking: any) => booking.userEmail === user.email).length
+    }));
+  }
+
+  // ngOnInit(): void {
+  //   this.users = JSON.parse(localStorage.getItem('sportUsers') || '[]');
+  // }
 
   getBookingCount(email: string): number {
     const bookings = JSON.parse(localStorage.getItem('bookings') || '[]');

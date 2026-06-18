@@ -1,6 +1,6 @@
 .gallery-page {
-    min-height: 100vh;
-    padding: 30px;
+    // min-height: 100vh;
+    padding: 50px;
     background: linear-gradient(135deg,
             #f64d5921,
             #de555f75,
@@ -18,11 +18,12 @@
             text-align: center;
             color: #cf0c0c;
             font-size: 42px;
+            margin: 0 0 30px;
         }
 
         .intro {
             text-align: center;
-            margin-bottom: 40px;
+            margin: 0 0 40px;
             font-size: 17px;
         }
 
@@ -40,7 +41,7 @@
                 h2 {
                     text-align: center;
                     color: #de555f;
-                    margin-bottom: 20px;
+                    margin: 0 0 20px;
                 }
 
                 .carousel {

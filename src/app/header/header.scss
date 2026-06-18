@@ -4,6 +4,9 @@ body {
 }
 
 .nav {
+    position: sticky;
+    top: 0;
+    z-index: 999;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -13,11 +16,12 @@ body {
     border-bottom: 4px solid #de555f;
 
     .logo {
-        font-size: 33px;
+        font-size: 32px;
         font-weight: bold;
         font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
         cursor: pointer;
         transition: 0.4s ease;
+        margin: 10px 0;
 
         &:hover {
             transform: scale(1.15);
@@ -25,25 +29,44 @@ body {
     }
 
     .navleft {
-        display: flex;
-        gap: 20px;
 
-        a {
-            color: white;
-            font-size: 18px;
-            text-decoration: none;
-            padding: 8px;
-            font-family: sans-serif;
-            border-radius: 7px;
-            box-shadow:
-                0 4px 10px rgba(0, 0, 0, 0.15),
-                0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+        // display: flex;
+        // gap: 20px;
+        .navMenu {
+            display: flex;
+            gap: 20px;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
 
-        a:hover {
-            box-shadow:
-                0 8px 18px rgba(0, 0, 0, 0.25),
-                0 4px 8px rgba(0, 0, 0, 0.15);
+            li {
+
+                a {
+                    display: block;
+                    color: white;
+                    font-size: 18px;
+                    text-decoration: none;
+                    padding: 8px;
+                    font-family: sans-serif;
+                    border-radius: 7px;
+                    box-shadow:
+                        0 4px 10px rgba(0, 0, 0, 0.15),
+                        0 2px 4px rgba(0, 0, 0, 0.1);
+                    transition: all 0.3s ease;
+
+                    &:hover {
+                        box-shadow:
+                            0 8px 18px rgba(0, 0, 0, 0.25),
+                            0 4px 8px rgba(0, 0, 0, 0.15);
+                        transform: translateY(-2px);
+                    }
+
+                    &:active {
+                        background: rgba(255, 255, 255, 0.2);
+                        font-weight: 600;
+                    }
+                }
+            }
         }
     }
 

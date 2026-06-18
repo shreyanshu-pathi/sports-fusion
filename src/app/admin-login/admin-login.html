@@ -1,29 +1,57 @@
 <div class="adminLoginContainer">
 
-    <div class="adminLoginCard">
+    <form [formGroup]="adminForm">
 
         <h1>Admin Login</h1>
 
-        <form [formGroup]="adminForm">
 
-            <input
-                type="email"
-                placeholder="Enter Email"
-                formControlName="email">
+        <div class="adminLoginField">
+            <label>Email</label>
+            <div class="input-wrapper">
+                <input type="email" formControlName="email" placeholder="Enter email">
+                <mat-icon matSuffix>email</mat-icon>
+            </div>
 
-            <input
-                type="password"
-                placeholder="Enter Password"
-                formControlName="password">
+            @if (adminForm.controls.email.invalid &&
+            (adminForm.controls.email.touched || submitted)) {
 
-            <button
-                type="button"
-                (click)="loginAdmin()">
-                Login
-            </button>
+            @if (adminForm.controls.email.errors?.['required']) {
+            <span class="error">Email is required</span>
+            }
 
-        </form>
+            @if (adminForm.controls.email.errors?.['email']) {
+            <span class="error">Enter valid email address</span>
+            }
+            }
+        </div>
 
-    </div>
+        <div class="adminLoginField">
+            <label>Password</label>
+
+            <div class="input-wrapper">
+                <input type="password" formControlName="password" placeholder="Enter password">
+                <mat-icon matSuffix>lock</mat-icon>
+            </div>
+
+            @if (adminForm.controls.password.invalid &&
+            (adminForm.controls.password.touched || submitted)) {
+
+            @if (adminForm.controls.password.errors?.['required']) {
+            <span class="error">Password is required</span>
+            }
+            }
+        </div>
+
+        <div class="forgotPassword">
+            <a (click)="forgotPassword()">Forgot Password?</a>
+        </div>
+
+        @if(error){
+        <div class="adminLoginError">{{ error }}</div>
+        }
+
+        <button type="button" class="adminBtn" (click)="loginAdmin()">Login</button>
+
+    </form>
 
 </div>

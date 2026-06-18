@@ -33,7 +33,7 @@
 
             &:hover {
                 background: #de555f;
-                color: white;   
+                color: white;
                 box-shadow: 0 6px 20px rgba(222, 85, 95, 0.25);
             }
         }
@@ -82,7 +82,7 @@
         cursor: pointer;
         margin-left: 10px;
     }
-    
+
     .cancelDisabled {
         display: inline-block;
         padding: 6px 14px;
@@ -136,10 +136,13 @@
         margin: 12px 0;
         color: #333;
         line-height: 1.6;
+        display: flex;
+        gap: 20px;
     }
 
     strong {
         color: #de555f;
+        font-size: 16px;
     }
 }
 

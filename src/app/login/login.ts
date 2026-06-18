@@ -15,7 +15,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
-export class Login {
+export class Login implements OnInit {
 
   isvalid: boolean = false;
   submitted: boolean = false;
@@ -25,6 +25,15 @@ export class Login {
   router = inject(Router);
   snackBar = inject(MatSnackBar);
   dialog = inject(MatDialog);
+
+  ngOnInit(): void {
+    const isUserLoggedIn = !!localStorage.getItem('loggedInUser');
+
+    if (isUserLoggedIn) {
+      this.router.navigate(['/dashboard']);
+    }
+
+  }
 
   loginForm = new FormGroup({
 
@@ -46,19 +55,6 @@ export class Login {
     });
   }
 
-  ngOnInIt(): void{
-    const isUserLoggedIn = !!localStorage.getItem('loggedInUser');
-    const isAdminLoggedIn = localStorage.getItem('adminLoggedIn') === 'true';
-
-    if(isUserLoggedIn) {
-      this.router.navigate(['/dashboard']);
-    }
-
-    if(isAdminLoggedIn){
-      this.router.navigate(['/admin']);
-    }
-  }
-  
   onLogin(): void {
 
     this.submitted = true;

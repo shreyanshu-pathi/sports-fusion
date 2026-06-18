@@ -13,19 +13,36 @@ export class Admindashboard {
   totalRevenue = 0;
   todayBookings = 0;
 
-  ngOnInIt(): void {
+  ngOnInit(): void {
 
     const users = JSON.parse(localStorage.getItem('sportUsers') || '[]');
     const bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
 
     this.totalUsers = users.length;
-    this.totalBookings = bookings.length;
-    this.totalRevenue = bookings.reduce(
-      (sum: number, booking: any) => { sum + (bookings.amount || 0), 0}
-    );
 
-    const today = new Date().toLocaleDateString();
+    this.totalBookings = bookings.length;
+
+    // Revenue Calculation
+    this.totalRevenue = bookings.reduce(
+      (sum: number, booking: any) => sum + (Number(booking.amount) || 0), 0);
+
+    // Today's Bookings
+    const today = new Date().toDateString();
+
     this.todayBookings = bookings.filter(
-      (booking: any) => booking.date === today).length;
+      (booking: any) =>
+        new Date(booking.date).toDateString() === today
+    ).length;
+
+    console.log(bookings);
+console.log(today);
+
+bookings.forEach((booking: any) => {
+  console.log(
+    booking.date,
+    new Date(booking.date),
+    new Date(booking.date).toDateString()
+  );
+});
   }
 }

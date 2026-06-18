@@ -364,7 +364,7 @@ export class Dashboard implements OnInit {
       court: this.selectedCourt,
       players: this.selectedPlayers,
 
-      date: this.selectedDate?.toLocaleDateString(),
+      date: this.selectedDate?.toISOString(),
       time: this.selectedSlot,
 
       amount: this.totalAmount,
