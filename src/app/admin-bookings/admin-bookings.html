@@ -1,62 +1,110 @@
 <div class="bookingContainer">
 
-    <h2>All Bookings</h2>
+    <div class="glassCard">
 
-    <div class="statsCard">
-        <h3>Total Bookings: {{ filteredBookings.length }}</h3>
-    </div>
+        <!-- Search Filter -->
+        <div class="tableActions">
+            <h2>Booking Management</h2>
 
-    <div class="filterSection">
-        <select [(ngModel)]="selectedSport" (change)="filterBookings()">
-            <option value="">All sports</option>
-            <option value="Cricket">Cricket</option>
-            <option value="Badminton">Badminton</option>
-            <option value="Football">Football</option>
-            <option value="Volleyball">Volleyball</option>
-            <option value="Basketball">Basketball</option>
-            <option value="Tennis">Tennis</option>
-        </select>
-    </div>
+            <mat-form-field appearance="outline" class="searchField">
+                <mat-label>Search Bookings</mat-label>
+                <input matInput placeholder="Search user, sport or venue" (keyup)="applyFilter($event)">
+                <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+        </div>
 
-    @if(filteredBookings.length > 0){
-    <div class="tableWrapper">
-        <table>
-            <thead>
-                <tr>
-                    <th>User</th>
-                    <th>Sport</th>
-                    <th>venue</th>
-                    <th>Court</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Amount</th>
-                    <th>Payment Method</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
+        <div class="bookingCount">
+            Total Bookings: <span>{{ totalBookings }}</span>
+        </div>
 
-            <tbody>
-                @for(booking of filteredBookings; track $index){
-                <tr>
-                    <td>{{ booking.username }}</td>
-                    <td>{{ booking.sport }}</td>
-                    <td>{{ booking.venue }}</td>
-                    <td>{{ booking.court }}</td>
-                    <td>{{ booking.date }}</td>
-                    <td>{{ booking.time }}</td>
-                    <td>{{ booking.amount }}</td>
-                    <td>{{ booking.paymentMethod }}</td>
-                    <td><button class="cancelBtn" (click)="cancelBooking(booking)">Cancel</button></td>
-                </tr>
-                }
-            </tbody>
+        <table mat-table [dataSource]="dataSource" class="glassTable" matSort>
+
+            <!-- User -->
+            <ng-container matColumnDef="user">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>User</th>
+                <td mat-cell *matCellDef="let booking">{{ booking.username }}</td>
+            </ng-container>
+
+            <!-- Sport -->
+            <ng-container matColumnDef="sport">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Sport</th>
+                <td mat-cell *matCellDef="let booking">{{ booking.sport }}</td>
+            </ng-container>
+
+            <!-- Venue -->
+            <ng-container matColumnDef="venue">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Venue</th>
+                <td mat-cell *matCellDef="let booking">{{ booking.venue }}</td>
+            </ng-container>
+
+            <!-- Court -->
+            <ng-container matColumnDef="court">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Court</th>
+                <td mat-cell *matCellDef="let booking">{{ booking.court }}</td>
+            </ng-container>
+
+            <!-- Players -->
+             <ng-container matColumnDef="players">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Players</th>
+                <td mat-cell *matCellDef="let booking">{{ booking.players }}</td>
+             </ng-container>
+
+            <!-- Date -->
+            <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+                <td mat-cell *matCellDef="let booking">{{ booking.date }}</td>
+            </ng-container>
+
+            <!-- Time -->
+            <ng-container matColumnDef="time">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Time</th>
+                <td mat-cell *matCellDef="let booking">{{ booking.time }}</td>
+            </ng-container>
+
+            <!-- Amount -->
+            <ng-container matColumnDef="amount">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Amount</th>
+                <td mat-cell *matCellDef="let booking">{{ booking.amount }}</td>
+            </ng-container>
+
+            <!-- Payment Method -->
+            <ng-container matColumnDef="paymentMethod">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Payment Mode</th>
+                <td mat-cell *matCellDef="let booking">{{ booking.paymentMethod }}</td>
+            </ng-container>
+
+            <!-- Actions -->
+             <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
+                <td mat-cell *matCellDef="let booking">
+
+                    <div class="actionBtns">
+
+                        <!-- View -->
+                         <button mat-icon-button class="viewBtn" matTooltip="View Details" (click)="viewBooking(booking)">
+                            <mat-icon>visibility</mat-icon>
+                         </button>
+
+                         <!-- Edit -->
+                          <button mat-icon-button class="editBtn" matTooltip="Edit Booking" (click)="editBooking(booking)">
+                            <mat-icon>edit</mat-icon>
+                         </button>
+
+                         <!-- Delete -->
+                          <button mat-icon-button class="deleteBtn" matTooltip="Delete Booking" (click)="deleteBooking(booking)">
+                            <mat-icon>delete</mat-icon>
+                         </button>
+
+                    </div>
+
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
         </table>
     </div>
-    } @else {
 
-    <div class="emptyState">
-        No bookings found.
-    </div>
-
-    }
 </div>

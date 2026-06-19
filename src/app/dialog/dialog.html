@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>User Profile</h2>
+<h2>{{ isAdminEdit ? 'Edit User' : 'User Profile' }}</h2>
 
 <mat-dialog-content>
 
@@ -6,9 +6,9 @@
         @if (data.image) {
         <img [src]="data.image" alt="Profile">
         } @else {
-            <div class="no-image">
-                <mat-icon>account_circle</mat-icon>
-            </div>
+        <div class="no-image">
+            <mat-icon>account_circle</mat-icon>
+        </div>
         }
         <button mat-mini-fab type="button" class="edit-btn"
             (click)="fileInput.click()"><mat-icon>edit</mat-icon></button>
@@ -25,7 +25,7 @@
 
     <mat-form-field appearance="outline" class="full-width">
         <mat-label>Email</mat-label>
-        <input matInput type="email" [(ngModel)]="data.email">
+        <input matInput type="email" [(ngModel)]="data.email" [readonly]="isAdminEdit">
 
         <mat-icon matSuffix>email</mat-icon>
     </mat-form-field>

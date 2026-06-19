@@ -26,13 +26,13 @@
         @if (!isLoggedIn && !isAdminLoggedIn) {
         <button type="button" class="nav-buttons" routerLink="/register">Register</button>
         <button type="button" class="nav-buttons" routerLink="/login">Login</button>
-        <!-- <button type="button" class="nav-buttons adminBtn" routerLink="/admin-login">Admin</button> -->
+        <button type="button" class="nav-buttons adminBtn" routerLink="/admin-login">Admin</button>
         }
 
         @if (isLoggedIn) {
         <button class="nav-buttons" routerLink="/dashboard">Dashboard</button>
         <button type="button" class="nav-buttons" (click)="logout()">Logout</button>
         }
-        <button type="button" class="nav-buttons adminBtn" routerLink="/admin-login">Admin</button>
+        <!-- <button type="button" class="nav-buttons adminBtn" routerLink="/admin-login">Admin</button> -->
     </div>
 </div>

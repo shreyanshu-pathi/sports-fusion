@@ -1,115 +1,110 @@
-// .tableContainer{
-//     width: 100%;
-//     overflow-x: auto;
-
-//     table{
-//         width: 100%;
-//         border-radius: 12px;
-//         overflow: hidden;
-
-//         .mat-mdc-header-row {
-//             background: #de555f;
-//         }
-
-//         .mat-mdc-header-cell{
-//             color: white;
-//             font-size: 17px;
-//             font-weight: 600;
-//         }
-
-//         .mat-mdc-row:hover{
-//             background: #f8fafc;
-//         }
-//     }
-// }
-
 .usersContainer {
     padding: 24px;
-}
 
-.glassCard {
-    padding: 25px;
-    border-radius: 24px;
+    .glassCard {
+        padding: 24px;
+        border-radius: 24px;
+        overflow: hidden;
+        background: rgb(255 255 255 / 32%);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
 
-    background: rgba(255, 255, 255, 0.18);
+        .tableActions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
 
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+            h2 {
+                margin-bottom: 24px;
+                text-align: center;
+                font-size: 30px;
+                font-weight: 700;
+            }
 
-    border: 1px solid rgba(255, 255, 255, 0.25);
+            .searchField {
+                width: 320px;
+            }
 
-    box-shadow:
-        0 8px 32px rgba(31, 38, 135, 0.15);
+            ::ng-deep .searchField .mat-mdc-text-field-wrapper {
+                background: rgba(255, 255, 255, 0.12);
+                backdrop-filter: blur(12px);
+                border-radius: 14px;
+            }
 
-    overflow: hidden;
+            ::ng-deep .searchField .mdc-notched-outline {
+                border-color: rgba(255, 255, 255, 0.25);
+            }
+        }
 
-    h2 {
-        margin-bottom: 25px;
-        color: #1e293b;
-        font-size: 28px;
-        font-weight: 700;
-    }
-}
 
-.glassTable {
-    width: 100%;
-    background: transparent !important;
-}
+        .glassTable {
+            width: 100%;
+            background: #ffffff3d;
 
-.mat-mdc-table {
-    background: transparent !important;
-}
+            .mat-mdc-table {
+                background: #ffffff3d;
+            }
 
-.mat-mdc-header-row {
-    background: rgba(255, 255, 255, 0.15);
-}
+            .mat-mdc-header-row {
+                background: rgba(255, 255, 255, 0.15);
+            }
 
-.mat-mdc-header-cell {
-    color: #1e293b;
-    font-weight: 700;
-    font-size: 15px;
-}
+            .mat-mdc-header-cell {
+                color: #1e293b;
+                font-weight: 600;
+                font-size: 18px;
+            }
 
-.mat-mdc-row {
-    transition: 0.3s ease;
+            .mat-mdc-row {
+                transition: 0.3s ease;
 
-    &:hover {
-        background: rgba(255, 255, 255, 0.08);
-    }
-}
+                &:hover {
+                    background: rgba(255, 255, 255, 0.877);
+                }
+            }
 
-.mat-mdc-cell {
-    color: #334155;
-    font-size: 14px;
-}
+            .mat-mdc-cell {
+                color: #334155;
+                font-size: 16px;
+            }
+        }
 
-.bookingBadge {
-    padding: 6px 12px;
-    border-radius: 20px;
+        .bookingBadge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: rgba(34, 197, 94, 0.15);
+            font-weight: 600;
+        }
 
-    background: rgba(34, 197, 94, 0.15);
+        .actionBtn {
+            display: flex;
+            gap: 10px;
 
-    color: #15803d;
-    font-weight: 600;
-}
+            .deleteBtn,
+            .editBtn {
+                border: none;
+                border-radius: 50%;
+                padding: 6px 8px;
+                cursor: pointer;
+            }
 
-.deleteBtn {
-    border: none;
-    padding: 8px 16px;
-    border-radius: 10px;
+            .editBtn {
+                background: rgba(34, 197, 94, 0.15);
+                color: #16a34a;
+            }
 
-    background: linear-gradient(
-        135deg,
-        #ef4444,
-        #dc2626
-    );
+            .deleteBtn {
+                background: rgba(239, 68, 68, 0.15);
+                color: #dc2626;
+            }
 
-    color: white;
-    cursor: pointer;
+            .editBtn:hover,
+            .deleteBtn:hover {
+                transform: translateY(-2px) scale(1.08);
 
-    transition: 0.3s;
+            }
 
-    &:hover {
-        transform: translateY(-2px);
+        }
     }
 }

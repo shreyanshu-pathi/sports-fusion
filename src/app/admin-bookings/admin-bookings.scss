@@ -1,93 +1,117 @@
 .bookingContainer {
     padding: 24px;
-    max-width: 1200px;
-    margin: 0 auto;
 
-    h2 {
-        text-align: center;
-        font-size: 32px;
-        color: #cf0c0c;
-        margin-bottom: 25px;
-    }
+    .glassCard {
+        padding: 24px;
+        border-radius: 24px;
+        overflow: hidden;
+        background: rgb(255 255 255 / 32%);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
 
-    .statsCard {
-        width: fit-content;
-        margin: 0 auto 25px;
-        background: rgba(255, 255, 255, .2);
-        backdrop-filter: blur(15px);
-        padding: 2px 25px;
-        border-radius: 14px;
+        .tableActions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
 
-        h3 {
-            margin: 7px;
-            color: #de555f;
+            h2 {
+                margin-bottom: 24px;
+                text-align: center;
+                font-size: 30px;
+                font-weight: 700;
+            }
+
+            .searchField {
+                width: 320px;
+            }
+
+            ::ng-deep .searchField .mat-mdc-text-field-wrapper {
+                background: rgba(255, 255, 255, 0.12);
+                backdrop-filter: blur(12px);
+                border-radius: 14px;
+            }
+
+            ::ng-deep .searchField .mdc-notched-outline {
+                border-color: rgba(255, 255, 255, 0.25);
+            }
         }
-    }
 
-    .filterSection {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 25px;
-
-        select {
-            padding: 12px 16px;
-            border-radius: 10px;
-            border: none;
-            min-width: 180px;
-            font-size: 15px;
+        .bookingCount,
+        span {
+            font-size: 18px;
+            font-weight: 700;
+            color: black;
+            margin-bottom: 20px;
         }
-    }
 
-    .tableWrapper {
-        overflow-x: auto;
-        background: rgba(255, 255, 255, .18);
-        backdrop-filter: blur(20px);
-        border-radius: 20px;
-
-        table {
+        .glassTable {
             width: 100%;
-            border-collapse: collapse;
+            background: #ffffff3d;
 
-            th {
-                padding: 17px;
-                text-align: left;
-                color: #d32f2f;
-                font-size: 18px;
-                font-weight: 600;
-            }
+            .actionBtns {
+                display: flex;
+                gap: 8px;
 
-            tr:hover {
-                background: rgba(255, 255, 255, .1);
-            }
-
-            td {
-                padding: 17px;
-                color: #040404;
-                font-size: 15px;
-                border-top: 1px solid rgba(255, 255, 255, 0.15);
-
-                .cancelBtn {
-                    padding: 10px 12px;
-                    font-size: 13px;
-                    font-weight: 600;
+                .viewBtn,
+                .editBtn,
+                .deleteBtn {
                     border: none;
-                    border-radius: 10px;
+                    border-radius: 50%;
+                    padding: 6px 8px;
                     cursor: pointer;
-                    color: white;
-                    background: linear-gradient(135deg, #ff5252, #d32f2f);
+                }
+
+                .viewBtn {
+                    background: rgba(59, 130, 246, 0.15);
+                    color: #2563eb;
+                }
+
+                .editBtn {
+                    background: rgba(34, 197, 94, 0.15);
+                    color: #16a34a;
+                }
+
+                .deleteBtn {
+                    background: rgba(239, 68, 68, 0.15);
+                    color: #dc2626;
+                }
+
+                .viewBtn:hover,
+                .editBtn:hover,
+                .deleteBtn:hover {
+                    transform: translateY(-2px) scale(1.08);
+
+                }
+            }
+
+                .mat-mdc-table {
+                    background: #ffffff3d;
+                }
+
+                .mat-mdc-header-row {
+                    background: rgba(255, 255, 255, 0.15);
+                }
+
+                .mat-mdc-header-cell {
+                    color: #1e293b;
+                    font-weight: 600;
+                    font-size: 18px;
+                }
+
+                .mat-mdc-row {
                     transition: 0.3s ease;
 
                     &:hover {
-                        transform: translateY(-2px);
+                        background: rgba(255, 255, 255, 0.877);
                     }
                 }
+
+                .mat-mdc-cell {
+                    color: #334155;
+                    font-size: 16px;
+                }
+
             }
         }
     }
-    
-    .emptyState {
-        text-align: center;
-        padding: 40px;
-        color: #666;
-    }
-}

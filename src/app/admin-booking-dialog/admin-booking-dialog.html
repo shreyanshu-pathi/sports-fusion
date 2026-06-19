@@ -1,0 +1,65 @@
+<div class="bookingDialog">
+
+    <div class="dialogHeader">
+        <h2>Edit Booking</h2>
+    </div>
+
+    <div class="dialogContent">
+
+        <div class="field">
+            <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input matInput [(ngModel)]="data.username">
+            </mat-form-field>
+        </div> 
+        <div class="field">
+            <mat-form-field appearance="outline">
+                <mat-label>Sport</mat-label>
+                <input matInput [(ngModel)]="data.sport">
+            </mat-form-field>
+        </div>
+
+        <div class="field">
+            <mat-form-field appearance="outline">
+                <mat-label>Venue</mat-label>
+                <input matInput [(ngModel)]="data.venue">
+            </mat-form-field>
+        </div>
+
+        <div class="field">
+            <mat-form-field appearance="outline">
+                <mat-label>Court</mat-label>
+                <input matInput [(ngModel)]="data.court">
+            </mat-form-field>
+        </div>
+
+        <div class="field">
+            <mat-form-field appearance="outline">
+                <mat-label>Players</mat-label>
+                <input matInput [(ngModel)]="data.players">
+            </mat-form-field>
+        </div>
+
+        <div class="field">
+            <mat-form-field appearance="outline">
+                <mat-label>Amount</mat-label>
+                <input matInput [(ngModel)]="data.amount">
+            </mat-form-field>
+        </div>
+
+        <div class="field">
+            <mat-form-field appearance="outline">
+                <mat-label>Payment Mode</mat-label>
+                <input matInput [(ngModel)]="data.paymentMethod">
+            </mat-form-field>
+        </div>
+
+        <!-- Buttons -->
+        <div class="dialogActions">
+
+            <button mat-stroked-button type="button" (click)="close()">Cancel</button>
+            <button mat-raised-button type="button" (click)="save()">Save Changes</button>
+
+        </div>
+    </div>
+</div>
