@@ -7,7 +7,7 @@
     .statCard {
         padding: 30px;
         text-align: center;
-        background: rgba(255, 255, 255, 0.2);
+        background: rgb(255 255 255 / 68%);
         backdrop-filter: blur(20px);
         border-radius: 20px;
         border: 1px solid rgba(255, 255, 255, 0.3);
@@ -20,13 +20,13 @@
         }
 
         h2 {
-            color: #de555f;
+            color: black;
             font-size: 24px;
             margin-bottom: 24px;
         }
 
         h1 {
-            color: #333;
+            color: #ef0e0e;;
             font-size: 40px;
             font-weight: 700;
         }

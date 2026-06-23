@@ -9,10 +9,12 @@ import { MatTooltip } from "@angular/material/tooltip";
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AdminBookingDialog } from '../admin-booking-dialog/admin-booking-dialog';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-admin-bookings',
-  imports: [FormsModule, MatTableModule, MatFormFieldModule, MatInputModule, MatIconModule, MatSortModule, MatTooltip, MatDialogModule],
+  imports: [FormsModule, MatTableModule, MatFormFieldModule, MatInputModule,
+    MatIconModule, MatSortModule, MatTooltip, MatDialogModule, DatePipe],
   templateUrl: './admin-bookings.html',
   styleUrl: './admin-bookings.scss',
 })
@@ -29,6 +31,7 @@ export class AdminBookings {
     'sport',
     'venue',
     'court',
+    'players',
     'date',
     'time',
     'amount',
@@ -43,16 +46,24 @@ export class AdminBookings {
   selectedSport = '';
 
   ngOnInit(): void {
-
-
-    this.filteredBookings = [...this.bookings];
+    // this.filteredBookings = [...this.bookings];
 
     this.loadBookings();
+    this.dataSource.filterPredicate = (
+      data: any,
+      filter: string
+    ) => {
+      return (
+        data.username?.toLowerCase().includes(filter) ||
+        data.sport?.toLowerCase().includes(filter) ||
+        data.venue?.toLowerCase().includes(filter)
+      )
+    }
+
   }
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
-
   }
 
   // Loads All Bookings
@@ -79,7 +90,15 @@ export class AdminBookings {
 
   // View Booking
   viewBooking(booking: any): void {
-
+    console.log('view booking', booking)
+    this.dialog.open(AdminBookingDialog, {
+      width: '550px',
+      disableClose: false,
+      data: {
+        ...booking,
+        isViewMode: true
+      }
+    });
   }
 
   // Edit Booking
@@ -92,20 +111,23 @@ export class AdminBookings {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(!result) return;
+      if (!result) return;
 
       const bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
       const index = bookings.findIndex(
-        (b: any) => 
+        (b: any) =>
           b.userEmail === booking.userEmail &&
-        b.date === booking.date &&
-        b.time === booking.time &&
-        b.court === booking.court
+          b.date === booking.date &&
+          b.time === booking.time &&
+          b.court === booking.court
       );
 
-      if(index !== -1){
-        booking[index] = result;
-        localStorage.setItem('bookings',JSON.stringify(bookings));
+      if (index !== -1) {
+        booking[index] = {
+          ...booking[index],
+          ...result
+        };
+        localStorage.setItem('bookings', JSON.stringify(bookings));
         this.loadBookings();
       }
     })

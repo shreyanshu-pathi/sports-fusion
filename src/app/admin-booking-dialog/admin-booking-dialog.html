@@ -1,7 +1,7 @@
 <div class="bookingDialog">
 
     <div class="dialogHeader">
-        <h2>Edit Booking</h2>
+        <h2>{{ isViewMode ? 'Booking Details' : 'Edit Booking' }}</h2>
     </div>
 
     <div class="dialogContent">
@@ -9,48 +9,48 @@
         <div class="field">
             <mat-form-field appearance="outline">
                 <mat-label>Name</mat-label>
-                <input matInput [(ngModel)]="data.username">
+                <input matInput [(ngModel)]="data.username" [readonly]="isViewMode">
             </mat-form-field>
-        </div> 
+        </div>
         <div class="field">
             <mat-form-field appearance="outline">
                 <mat-label>Sport</mat-label>
-                <input matInput [(ngModel)]="data.sport">
+                <input matInput [(ngModel)]="data.sport" [readonly]="isViewMode">
             </mat-form-field>
         </div>
 
         <div class="field">
             <mat-form-field appearance="outline">
                 <mat-label>Venue</mat-label>
-                <input matInput [(ngModel)]="data.venue">
+                <input matInput [(ngModel)]="data.venue" [readonly]="isViewMode">
             </mat-form-field>
         </div>
 
         <div class="field">
             <mat-form-field appearance="outline">
                 <mat-label>Court</mat-label>
-                <input matInput [(ngModel)]="data.court">
+                <input matInput [(ngModel)]="data.court" [readonly]="isViewMode">
             </mat-form-field>
         </div>
 
         <div class="field">
             <mat-form-field appearance="outline">
                 <mat-label>Players</mat-label>
-                <input matInput [(ngModel)]="data.players">
+                <input matInput [(ngModel)]="data.players" [readonly]="isViewMode">
             </mat-form-field>
         </div>
 
         <div class="field">
             <mat-form-field appearance="outline">
                 <mat-label>Amount</mat-label>
-                <input matInput [(ngModel)]="data.amount">
+                <input matInput [(ngModel)]="data.amount" [readonly]="isViewMode">
             </mat-form-field>
         </div>
 
         <div class="field">
             <mat-form-field appearance="outline">
                 <mat-label>Payment Mode</mat-label>
-                <input matInput [(ngModel)]="data.paymentMethod">
+                <input matInput [(ngModel)]="data.paymentMethod" [readonly]="isViewMode">
             </mat-form-field>
         </div>
 
@@ -58,7 +58,10 @@
         <div class="dialogActions">
 
             <button mat-stroked-button type="button" (click)="close()">Cancel</button>
+
+            @if (!isViewMode) {
             <button mat-raised-button type="button" (click)="save()">Save Changes</button>
+            }
 
         </div>
     </div>

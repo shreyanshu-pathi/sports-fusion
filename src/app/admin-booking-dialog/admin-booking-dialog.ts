@@ -15,6 +15,12 @@ export class AdminBookingDialog {
 
   constructor(public dialogRef: MatDialogRef<AdminBookingDialog>, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
+  isViewMode = false;
+
+  ngOnInit(): void {
+    this.isViewMode = this.data?.isViewMode || false;
+  }
+    
   save(): void {
     this.dialogRef.close(this.data);
   }

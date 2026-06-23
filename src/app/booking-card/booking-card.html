@@ -1,0 +1,8 @@
+<div class="bookingItem">
+    <h3>{{ booking.sport }}</h3>
+    <p>{{ booking.date | date: 'dd/MM/yyyy' }}</p>
+    <p>{{ booking.court }}</p>
+    <p>{{ booking.venue }}</p>
+    <p>{{ booking.players }} Players</p>
+    <button class="cancelBtn" (click)="cancel()"> Cancel Booking</button>
+</div>

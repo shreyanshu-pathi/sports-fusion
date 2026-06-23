@@ -187,9 +187,8 @@
 
                 <div class="optionGrid">
                     @for (slot of slots; track slot) {
-                    <button type="button" [disabled]="isSlotBooked(selectedCourt, slot)" 
-                    [class.booked]="isSlotBooked(selectedCourt, slot)" 
-                    (click)="selectSlot(slot)">
+                    <button type="button" [disabled]="isSlotBooked(selectedCourt, slot)"
+                        [class.booked]="isSlotBooked(selectedCourt, slot)" (click)="selectSlot(slot)">
                         {{ slot }}
                     </button>
                     }
@@ -311,19 +310,26 @@
             <h2>Booked Slots</h2>
 
             @if (bookings.length > 0) {
-            @for (booking of bookings; track $index) {
+            <!-- @for (booking of bookings; track $index) { -->
 
-            <div class="bookingItem">
+
+
+            /* <!-- <div class="bookingItem">
                 <h3>{{ booking.sport }}</h3>
                 <p>{{ booking.date}} & {{booking.time}}</p>
                 <p>{{ booking.court }}</p>
                 <p>{{ booking.venue }}</p>
                 <p>{{ booking.players }}</p>
-            </div>
-            }
-            } @else {
+            </div> --> */
+            /* } */
+            @for (booking of bookings; track $index) {
+            <app-booking-card [booking]="booking" (cancelBooking)="onCancelBooking($event)"> // [booking]="booking" sends data from Parent ➜ Child using @Input(
+            </app-booking-card> //(cancelBooking)="onCancelBooking($event)" receives data from Child ➜ Parent using @Output()
+             } 
+            <!--@else {
             <p>No bookings yet</p>
-            }
+            } -->
+
         </div>
 
     </div>
@@ -426,6 +432,6 @@
 
     }
 
-    
+
 
 </div>

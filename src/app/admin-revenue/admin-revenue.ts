@@ -24,19 +24,29 @@ export class AdminRevenue implements OnInit {
   calculateRevenue(bookings: any[]): void {
 
     this.totalRevenue = 0;
-  this.todayRevenue = 0;
+    this.todayRevenue = 0;
 
-    const today = new Date().toLocaleDateString();
+    const today = new Date().toDateString();
 
     const sportMap: any = {};
     const venueMap: any = {};
+
+//     console.log('Today:', new Date().toDateString());
+
+// bookings.forEach((booking: any) => {
+//   console.log(
+//     booking.date,
+//     new Date(booking.date).toDateString()
+//   );
+// });
 
     bookings.forEach(booking => {
       const amount = Number(booking.amount) || 0;
 
       this.totalRevenue += amount;
 
-      if (booking.date === today) {
+      if (
+        new Date (booking.date).toDateString() === today) {
         this.todayRevenue += amount;
       }
 

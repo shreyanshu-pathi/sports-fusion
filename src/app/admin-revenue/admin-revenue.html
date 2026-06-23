@@ -1,51 +1,54 @@
 <div class="revenueContainer">
 
-    <h2>Revenue Analytics</h2>
+    <div class="glassCard">
 
-    <div class="revenueCards">
+        <h2>Revenue Analytics</h2>
 
-        <div class="card">
-            <h3>Total Revenue</h3>
-            <p>{{ totalRevenue }}</p>
+        <div class="revenueCards">
+
+            <div class="card">
+                <h3>Total Revenue</h3>
+                <p>{{ totalRevenue }}</p>
+            </div>
+
+            <div class="card">
+                <h3>Today's Revenue</h3>
+                <p>{{ todayRevenue }}</p>
+            </div>
+
+            <div class="card">
+                <h3>Top Sport</h3>
+                <p>{{ topSport || 'N/A' }}</p>
+            </div>
         </div>
 
-        <div class="card">
-            <h3>Today's Revenue</h3>
-            <p>{{ todayRevenue }}</p>
-        </div>
+        <div class="analyticsGrid">
 
-        <div class="card">
-            <h3>Top Sport</h3>
-            <p>{{ topSport || 'N/A' }}</p>
-        </div>
-    </div>
+            <div class="analyticsCard">
 
-    <div class="analyticsGrid">
+                <h3>Revenue by Sport</h3>
 
-        <div class="analyticsCard">
-
-            <h3>Revenue by Sport</h3>
-
-            @for (sport of revenueBySport; track sport[0]) {
+                @for (sport of revenueBySport; track sport[0]) {
                 <div class="item">
                     <span>{{ sport[0] }}</span>
                     <strong>{{ sport[1] }}</strong>
                 </div>
-            }
-        </div>
+                }
+            </div>
 
-        <div class="analyticsCard">
+            <div class="analyticsCard">
 
-            <h3>Revenue by Venue</h3>
+                <h3>Revenue by Venue</h3>
 
-            @for (venue of revenueByVenue; track venue[0]) {
+                @for (venue of revenueByVenue; track venue[0]) {
                 <div class="item">
                     <span>{{ venue[0] }}</span>
                     <strong>{{ venue[1] }}</strong>
                 </div>
-            }
-        </div>
+                }
+            </div>
 
+        </div>
     </div>
 
 </div>

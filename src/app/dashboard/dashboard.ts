@@ -12,13 +12,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { DatePipe } from '@angular/common';
 import { QRCodeComponent } from 'angularx-qrcode';
+import { BookingCard } from '../booking-card/booking-card';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [FormsModule, MatDialogModule, MatFormFieldModule,
     MatInputModule, MatDatepickerModule, MatNativeDateModule, MatIconModule,
-    MatSnackBarModule, DatePipe, QRCodeComponent, RouterLink, RouterOutlet],
+    MatSnackBarModule, DatePipe, QRCodeComponent, RouterLink, RouterOutlet, BookingCard],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss'
 })
@@ -194,7 +195,7 @@ export class Dashboard implements OnInit {
     const allBookings = JSON.parse(localStorage.getItem('bookings') || '[]');
 
     return allBookings.some((booking: any) =>
-      booking.date === this.selectedDate?.toLocaleDateString() &&
+      new Date(booking.date).toDateString() === this.selectedDate?.toDateString() &&
       booking.court === court &&
       booking.time === slot
     );
@@ -334,6 +335,29 @@ export class Dashboard implements OnInit {
     this.openQr = false;
   }
 
+  onCancelBooking(booking: any): void {
+
+  const bookings = JSON.parse(
+    localStorage.getItem('bookings') || '[]'
+  );
+
+  const updatedBookings = bookings.filter(
+    (b: any) =>
+      !(
+        b.userEmail === booking.userEmail &&
+        b.date === booking.date &&
+        b.time === booking.time
+      )
+  );
+
+  localStorage.setItem(
+    'bookings',
+    JSON.stringify(updatedBookings)
+  );
+
+  this.loadBookings();
+}
+
   // Confirm Booking
   confirmBooking(): void {
 
@@ -364,7 +388,7 @@ export class Dashboard implements OnInit {
       court: this.selectedCourt,
       players: this.selectedPlayers,
 
-      date: this.selectedDate?.toISOString(),
+      date: this.selectedDate? new Date(this.selectedDate).toISOString()  : '',
       time: this.selectedSlot,
 
       amount: this.totalAmount,
@@ -374,8 +398,6 @@ export class Dashboard implements OnInit {
     const bookings = JSON.parse(
       localStorage.getItem('bookings') || '[]'
     );
-
-
 
     // Existing Bookings
     const bookingExists = bookings.some(
@@ -394,6 +416,8 @@ export class Dashboard implements OnInit {
       });
       return;
     }
+
+    
 
     // Reschedule Booking
     const oldBooking = JSON.parse(localStorage.getItem('rescheduleBooking') || 'null');
@@ -435,6 +459,8 @@ export class Dashboard implements OnInit {
     this.resetBookingForm();
   }
 
+
+  
   // Reset Form
   resetBookingForm(): void {
 

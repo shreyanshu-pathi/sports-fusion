@@ -15,23 +15,29 @@ body {
     padding: 24px 24px;
     border-bottom: 4px solid #de555f;
 
-    .logo {
-        font-size: 32px;
-        font-weight: bold;
-        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-        cursor: pointer;
-        transition: 0.4s ease;
-        margin: 10px 0;
+    .navLeft {
+        display: flex;
+        align-items: center;
 
-        &:hover {
-            transform: scale(1.15);
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            cursor: pointer;
+            transition: 0.4s ease;
+            margin: 10px 0;
+
+            &:hover {
+                transform: scale(1.15);
+            }
         }
     }
 
-    .navleft {
+    .navCenter {
 
-        // display: flex;
-        // gap: 20px;
+        display: flex;
+        align-items: center;
+
         .navMenu {
             display: flex;
             gap: 20px;
@@ -72,7 +78,9 @@ body {
 
     .navright {
         display: flex;
+        justify-content: flex-end;
         gap: 15px;
+        min-width: 320px;
 
         .nav-buttons {
             padding: 10px 22px;
