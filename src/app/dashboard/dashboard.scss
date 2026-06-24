@@ -141,7 +141,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 25px 30px;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.65);
     backdrop-filter: blur(40px);
     border-radius: 20px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
@@ -197,7 +197,7 @@
 
     .bookingCard {
         padding: 25px;
-        background: rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.65);
         backdrop-filter: blur(40px);
         border-radius: 20px;
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
@@ -292,7 +292,7 @@
                         color: white;
                         cursor: not-allowed;
                         opacity: 0.7;
-                    }   
+                    }
                 }
             }
 
@@ -324,7 +324,7 @@
 
             .paymentCard {
                 padding: 25px;
-                background: rgba(255, 255, 255, .18);
+                background: rgba(255, 255, 255, 0);
                 backdrop-filter: blur(20px);
                 border-radius: 20px;
 
@@ -383,19 +383,30 @@
                 }
 
                 .policyBox {
-                    margin-top: 25px;
-                    padding: 15px;
-                    border-radius: 12px;
-                    background: rgba(255, 255, 255, .6);
+                    margin-top: 18px;
+                    padding: 16px;
+                    border-radius: 14px;
+                    background: rgba(255, 255, 255, 0.12);
+                    border-left: 5px solid #de555f;
 
                     h4 {
-                        margin-top: 0;
-                        color: #cf0c0c;
+                        margin-bottom: 10px;
+                        color: #1e293b;
+                        font-size: 18px;
+                        font-weight: 700;
                     }
 
-                    p {
-                        margin-bottom: 0;
-                        font-size: 14px;
+                    ul {
+                        margin: 0;
+                        padding-left: 20px;
+
+                        li {
+                            margin-bottom: 8px;
+                            color: #1e293b;
+                            font-size: 15px;
+                            line-height: 1.5;
+                            list-style: none;
+                        }
                     }
                 }
 
@@ -454,35 +465,95 @@
         }
     }
 
-    .bookedSlots {
-        padding: 25px;
-        background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(40px);
-        border-radius: 20px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    .slotAvailability {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
 
-        h2 {
-            margin: 0 0 15px;
-            color: #cf0c0c;
-            font-size: 32px;
-        }
+        .availabilityCard {
+            padding: 20px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 
-        .bookingItem {
-            padding: 7px 0 7px 7px;
-            margin-bottom: 15px;
-            background: rgb(255 254 255 / 80%);
-            border-radius: 12px;
-
-            h3 {
-                color: #de555f;
-                margin-bottom: 10px;
-                margin-top: 0;
-                font-size: 15px;
+            h2 {
+                margin-bottom: 16px;
+                font-size: 24px;
+                font-weight: 700;
+                color: #1e293b;
+                text-align: center;
             }
 
-            p {
-                margin: 4px 0;
-                color: #0a0a0a;
+            .availabilityItem {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 12px 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+
+                &:last-child {
+                    border-bottom: none;
+                }
+
+                span {
+                    font-size: 16px;
+                    font-weight: 600;
+                    color: #334155;
+                }
+
+                strong {
+                    font-size: 14px;
+                    font-weight: 700;
+                }
+            }
+
+            .available {
+                color: #16a34a;
+            }
+
+            .warning {
+                color: #f59e0b;
+            }
+
+            .full {
+                color: #ef4444;
+            }
+        }
+
+        .bookedSlots {
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(40px);
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            height: 300px;
+            overflow: auto;
+
+            h2 {
+                margin: 0 0 15px;
+                color: #cf0c0c;
+                font-size: 32px;
+            }
+
+            .bookingItem {
+                padding: 7px 0 7px 7px;
+                margin-bottom: 15px;
+                background: rgb(255 254 255 / 80%);
+                border-radius: 12px;
+
+                h3 {
+                    color: #de555f;
+                    margin-bottom: 10px;
+                    margin-top: 0;
+                    font-size: 15px;
+                }
+
+                p {
+                    margin: 4px 0;
+                    color: #0a0a0a;
+                }
             }
         }
     }

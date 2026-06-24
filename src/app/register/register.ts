@@ -78,7 +78,7 @@ export class Register {
     if (this.registerForm.invalid) {
       return;
     }
-    console.log(this.registerForm.value);
+    // console.log(this.registerForm.value);
 
     const data = this.registerForm.value;
 
@@ -109,7 +109,6 @@ export class Register {
           verticalPosition: 'top'
         }
       )
-      // alert('Email already exists!');
       return;
     }
 
@@ -119,18 +118,16 @@ export class Register {
     // Save updated users
     this.set('sportUsers', sportUsers);
 
-    console.log('Before success snackbar');
+    // console.log('Before success snackbar');
 
-    const snackRef = this.snackBar.open('Registered Sucessfully', 'Close', {
+    const snackRef = this.snackBar.open('Registered Successfully', 'Close', {
       duration: 1000,
       panelClass: ['success-snackbar'],
       horizontalPosition: 'center',
       verticalPosition: 'top'
     });
 
-    console.log('After success snackbar');
-
-    // alert("Registered successfully!");
+    // console.log('After success snackbar');
 
     console.log(this.get('sportUsers'));
 
@@ -154,10 +151,4 @@ export class Register {
     const user = localStorage.getItem(key);
     return user ? JSON.parse(user) : null;
   }
-
-  // testsnackbar() {
-  //   this.snackBar.open('snackbar working!', 'Close', {
-  //     duration: 3000
-  //   })
-  // }
 }

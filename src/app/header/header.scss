@@ -10,6 +10,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    // background: rgba(255, 255, 255, 0.6);
     background: linear-gradient(90deg, rgb(246 59 59 / 78%), rgb(235 37 113 / 26%));
     color: white;
     padding: 24px 24px;
@@ -26,6 +27,7 @@ body {
             cursor: pointer;
             transition: 0.4s ease;
             margin: 10px 0;
+            // color: #de555f;
 
             &:hover {
                 transform: scale(1.15);
@@ -50,6 +52,7 @@ body {
                 a {
                     display: block;
                     color: white;
+                    // color: #de555f;
                     font-size: 18px;
                     text-decoration: none;
                     padding: 8px;

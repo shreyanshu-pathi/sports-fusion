@@ -128,6 +128,8 @@ export class Dashboard implements OnInit {
     this.memberSince = user.memberSince || 'N/A';
 
     this.loadBookings();
+
+    this.loadCourtAvailability();
   }
 
   // Load Bookings
@@ -200,6 +202,31 @@ export class Dashboard implements OnInit {
       booking.time === slot
     );
   }
+
+  // Slot Availbility Dashboard
+  courtAvailabilty: any[] = [];
+
+  loadCourtAvailability(): void {
+    const bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+
+    const courts = [
+      'Court A',
+      'Court B',
+      'Court C',
+      'Court D',
+      'Court E',
+    ];
+
+    this.courtAvailabilty = courts.map(court => {
+      const bookedCount = bookings.filter((b: any) => b.court === court).length;
+      const totalSlots = this.slots.length;
+      const remainingSlots = totalSlots - bookedCount;
+      return {
+        court, remainingSlots
+      };
+    });
+  }
+
   // Review Booking
   submitBooking(): void {
 
@@ -337,26 +364,26 @@ export class Dashboard implements OnInit {
 
   onCancelBooking(booking: any): void {
 
-  const bookings = JSON.parse(
-    localStorage.getItem('bookings') || '[]'
-  );
+    const bookings = JSON.parse(
+      localStorage.getItem('bookings') || '[]'
+    );
 
-  const updatedBookings = bookings.filter(
-    (b: any) =>
-      !(
-        b.userEmail === booking.userEmail &&
-        b.date === booking.date &&
-        b.time === booking.time
-      )
-  );
+    const updatedBookings = bookings.filter(
+      (b: any) =>
+        !(
+          b.userEmail === booking.userEmail &&
+          b.date === booking.date &&
+          b.time === booking.time
+        )
+    );
 
-  localStorage.setItem(
-    'bookings',
-    JSON.stringify(updatedBookings)
-  );
+    localStorage.setItem(
+      'bookings',
+      JSON.stringify(updatedBookings)
+    );
 
-  this.loadBookings();
-}
+    this.loadBookings();
+  }
 
   // Confirm Booking
   confirmBooking(): void {
@@ -388,7 +415,7 @@ export class Dashboard implements OnInit {
       court: this.selectedCourt,
       players: this.selectedPlayers,
 
-      date: this.selectedDate? new Date(this.selectedDate).toISOString()  : '',
+      date: this.selectedDate ? new Date(this.selectedDate).toISOString() : '',
       time: this.selectedSlot,
 
       amount: this.totalAmount,
@@ -417,7 +444,7 @@ export class Dashboard implements OnInit {
       return;
     }
 
-    
+
 
     // Reschedule Booking
     const oldBooking = JSON.parse(localStorage.getItem('rescheduleBooking') || 'null');
@@ -460,7 +487,7 @@ export class Dashboard implements OnInit {
   }
 
 
-  
+
   // Reset Form
   resetBookingForm(): void {
 

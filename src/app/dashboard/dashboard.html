@@ -266,11 +266,13 @@
 
                         <h4>Cancellation Policy </h4>
 
-                        <p>{{ cancellationMessage }}</p>
-
+                        <ul>
+                            <li>✅ 6+ Hours Before Slot → 100% Refund</li>
+                            <li>❌ Less Than 6 Hours → No Refund</li>
+                        </ul>
                     </div>
 
-
+                    <!-- Payment Methods -->
                     <div class="paymentMethods">
 
                         <h4>Payment Mode</h4>
@@ -305,31 +307,55 @@
         </div>
 
         <!-- Right panel -->
-        <div class="bookedSlots">
+        <!-- Slot Availability Dashboard -->
+        <div class="slotAvailability">
 
-            <h2>Booked Slots</h2>
+            <div class="availabilityCard">
 
-            @if (bookings.length > 0) {
-            <!-- @for (booking of bookings; track $index) { -->
+                <h2>Slot Availability</h2>
+
+                @for (court of courtAvailabilty; track court.court) {
+                <div class="availabilityItem">
+                    <span>{{ court.court }}</span>
+                    @if(court.remainingSlots > 3) {
+                    <strong class="available">{{ court.remainingSlots }} Slots Available</strong>
+                    } @else if (court.remainingSlots > 0) {
+                    <strong class="warning">{{ court.remainingSlots }} Slots left</strong>
+                    } @else {
+                    <strong class="full">Fully booked</strong>
+                    }
+                </div>
+                }
+            </div>
+
+            <div class="bookedSlots">
+
+                <h2>Booked Slots</h2>
+
+                @if (bookings.length > 0) {
+                <!-- @for (booking of bookings; track $index) { -->
 
 
 
-            /* <!-- <div class="bookingItem">
+                /* <!-- <div class="bookingItem">
                 <h3>{{ booking.sport }}</h3>
                 <p>{{ booking.date}} & {{booking.time}}</p>
                 <p>{{ booking.court }}</p>
                 <p>{{ booking.venue }}</p>
                 <p>{{ booking.players }}</p>
             </div> --> */
-            /* } */
-            @for (booking of bookings; track $index) {
-            <app-booking-card [booking]="booking" (cancelBooking)="onCancelBooking($event)"> // [booking]="booking" sends data from Parent ➜ Child using @Input(
-            </app-booking-card> //(cancelBooking)="onCancelBooking($event)" receives data from Child ➜ Parent using @Output()
-             } 
-            <!--@else {
+                /* } */
+                @for (booking of bookings; track $index) {
+                <app-booking-card [booking]="booking" (cancelBooking)="onCancelBooking($event)"> // [booking]="booking"
+                    sends data from Parent ➜ Child using @Input()
+                </app-booking-card> //(cancelBooking)="onCancelBooking($event)" receives data from Child ➜ Parent using
+                @Output()
+                }
+                <!-- @else {
             <p>No bookings yet</p>
             } -->
 
+            </div>
         </div>
 
     </div>
@@ -431,7 +457,5 @@
     </div>
 
     }
-
-
 
 </div>

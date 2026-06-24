@@ -43,7 +43,7 @@ export class ForgotPasswordDialog {
 
     localStorage.setItem('sportUsers', JSON.stringify(users));
 
-    const snackRef = this.snackBar.open('Password updated succesfully', 'Close', {
+    const snackRef = this.snackBar.open('Password updated successfully', 'Close', {
       duration: 3000,
       panelClass: ['success-snackBar']
     });

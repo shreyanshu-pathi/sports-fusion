@@ -17,7 +17,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 })
 export class Login implements OnInit {
 
-  isvalid: boolean = false;
+  isValid: boolean = false;
   submitted: boolean = false;
   error: string = '';
 
@@ -32,7 +32,6 @@ export class Login implements OnInit {
     if (isUserLoggedIn) {
       this.router.navigate(['/dashboard']);
     }
-
   }
 
   loginForm = new FormGroup({
@@ -94,7 +93,7 @@ export class Login implements OnInit {
     if (validUser) {
 
       localStorage.setItem('loggedInUser', JSON.stringify(validUser));
-      this.isvalid = true;
+      this.isValid = true;
       this.error = '';
       // alert('Login Successful!');
       this.loginForm.reset();
@@ -128,7 +127,7 @@ export class Login implements OnInit {
         }
       );
       // this.router.navigate(['/dashboard']);
-      this.isvalid = false;
+      this.isValid = false;
       this.error = 'Invalid email or password';
     }
   }
