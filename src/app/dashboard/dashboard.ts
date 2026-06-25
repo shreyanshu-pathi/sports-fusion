@@ -13,16 +13,18 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { DatePipe } from '@angular/common';
 import { QRCodeComponent } from 'angularx-qrcode';
 import { BookingCard } from '../booking-card/booking-card';
+import { Weather } from '../services/weather';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-dashboard',
-  standalone: true,
   imports: [FormsModule, MatDialogModule, MatFormFieldModule,
     MatInputModule, MatDatepickerModule, MatNativeDateModule, MatIconModule,
-    MatSnackBarModule, DatePipe, QRCodeComponent, RouterLink, RouterOutlet, BookingCard],
+    MatSnackBarModule, DatePipe, QRCodeComponent, RouterLink, RouterOutlet, BookingCard, MatTooltip],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss'
 })
+
 export class Dashboard implements OnInit {
 
   images = GALLERY_IMAGES;
@@ -30,6 +32,7 @@ export class Dashboard implements OnInit {
   router = inject(Router);
   dialog = inject(MatDialog);
   snackBar = inject(MatSnackBar);
+  weather = inject(Weather)
 
   // Modals
   showReviewModal = false;
@@ -109,6 +112,175 @@ export class Dashboard implements OnInit {
   selectedSlot = '';
   selectedPlayers: number | null = null;
 
+  // Weather
+  weatherMessage = '';
+  temperature = 0;
+  weatherData: any;
+
+  getWeatherMessage(sport: string, weather: any): string {
+    const temp = weather.temperature_2m;
+    const wind = weather.wind_speed_10m;
+
+    if (wind > 25) {
+      return `🌬 Strong winds expected. Consider indoor courts.`;
+    }
+
+    switch (sport) {
+
+      case 'Cricket':
+        return temp > 35
+          ? '☀ High temperature. Consider morning or evening slots also carry water.'
+          : '🏏 Pitch seems to be nice as well excellent weather for cricket.';
+
+      case 'Football':
+        return temp > 25
+          ? '⚽ Hot weather. Evening slots recommended.'
+          : '⚽ Great conditions for football.';
+
+      case 'Volleyball':
+        return temp > 30
+          ? '🏐 Afternoon heat may affect gameplay.'
+          : '🏐 Weather looks good to play volleyball,continue booking ahead! .';
+
+      case 'Tennis':
+        return temp > 20
+          ? '🎾 Early morning slot recommended.'
+          : '🎾 Excellent weather for tennis.';
+
+      case 'Badminton':
+        return '🏸 Indoor courts available regardless of weather.';
+
+      case 'Basketball':
+        return '🏀 Indoor courts available. Weather impact minimal.';
+
+      default:
+        return '✅ Weather conditions look good.';
+    }
+  }
+
+  venueCoordinates: any = {
+    'Jubilee Hills': {
+      lat: 17.4326,
+      lon: 78.4071
+    },
+
+    'Madhapur': {
+      lat: 17.4485,
+      lon: 78.3915
+    },
+
+    'Gachibowli': {
+      lat: 17.4401,
+      lon: 78.3489
+    }
+  }
+
+  // Notification Panel
+  showNotifications = false;
+  weatherNotifications: string[] = [];
+
+  // Toggle Notifications
+  toggleNotifications(): void {
+    this.showNotifications = !this.showNotifications;
+    if (this.showNotifications) {
+      this.generateWeatherNotifications();
+    }
+  }
+
+  // Close Notification Panel
+  closeNotifications(): void{
+    this.showNotifications = false;
+  }
+
+  // Generate Weather Notifications
+  generateWeatherNotifications(): void {
+    this.weatherNotifications = [];
+    this.bookings.forEach((booking: any) => {
+      const weather = this.weatherData?.current;
+
+      if (!weather) return;
+      const temp = weather.temperature_2m;
+      const wind = weather.wind_speed_10m;
+
+      const bookingDate = new Date(booking.date);
+      const today = new Date();
+
+      const daysRemaining = Math.ceil(bookingDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24);
+
+      switch (booking.sport) {
+
+        case 'Cricket':
+          if (daysRemaining <= 1) {
+            this.weatherNotifications.push(
+              `🌧 Rain expected near ${booking.time} at ${booking.venue}. 
+              Cricket pitch may become wet and slippery. Consider rescheduling.`
+            )
+          }
+
+          if (temp > 35) {
+            this.weatherNotifications.push(
+              `☀ Temperature may reach ${temp}°C at ${booking.venue}. Carry water and avoid long exposure.`
+            )
+          }
+          break;
+
+        case 'Football':
+          this.weatherNotifications.push(
+            `⚽ Light showers expected during evening hours. 
+             Grass surface at ${booking.venue} may be slippery. Wear proper studs.`
+          )
+
+          if (wind > 25) {
+            this.weatherNotifications.push(
+              `⚽ Strong winds expected at
+             ${booking.venue}. Gameplay may be affected.`
+            )
+          }
+          break;
+
+        case 'Volleyball':
+          this.weatherNotifications.push(
+            `🏐 Rain clouds expected in the next few hours.
+             Outdoor volleyball courts may become unavailable temporarily.`
+          )
+
+          if (temp > 30) {
+            this.weatherNotifications.push(
+              `🏐 Afternoon heat expected.
+             Consider an earlier slot or reschedule.`
+            )
+          }
+          break;
+
+        case 'Tennis':
+          this.weatherNotifications.push(
+            `🎾 Weather forecast indicates possible rain later today. Early morning sessions are recommended.`
+          )
+
+          if (temp > 34) {
+            this.weatherNotifications.push(
+              `🎾 Hot weather forecast.
+             Morning session recommended.`
+            )
+          }
+          break;
+
+        case 'Badminton':
+          this.weatherNotifications.push(
+            `🏸 Indoor court booked. Weather will not affect gameplay at ${booking.venue}.`
+          );
+          break;
+
+        case 'Basketball':
+
+          this.weatherNotifications.push(
+            `🏀 Indoor booking confirmed. Weather impact minimal.`
+          );
+          break;
+      }
+    })
+  }
+
   ngOnInit(): void {
 
     const user = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
@@ -130,6 +302,23 @@ export class Dashboard implements OnInit {
     this.loadBookings();
 
     this.loadCourtAvailability();
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+
+        this.weather.getWeather(latitude, longitude).subscribe(data => {
+          console.log(data);
+          this.weatherData = data;
+        });
+
+      },
+        error => {
+          console.error('Location access denied');
+        }
+      );
+    }
   }
 
   // Load Bookings
@@ -177,6 +366,16 @@ export class Dashboard implements OnInit {
     this.selectedPlayers = null;
     this.selectedDate = null;
     this.selectedSlot = '';
+
+    const location = this.venueCoordinates[venue];
+
+    if (!location) return;
+
+    this.weather.getWeather(location.lat, location.lon).subscribe(data => {
+      this.weatherData = data;
+
+      this.weatherMessage = this.getWeatherMessage(this.selectedSport, data.current);
+    });
   }
 
   selectCourt(court: string): void {

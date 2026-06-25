@@ -1,14 +1,12 @@
-<div class="dashboard">
-
-    <!-- @if(showProfileModal) {
+<!-- @if(showProfileModal) {
     <div class="modalOverlay" (click)="closeProfileModal()">
 
         <div class="profileCard" (click)="$event.stopPropagation()">
 
             <!-- Close Button -->
-    <!-- <button type="button" class="closeBtn" (click)="closeProfileModal()">x</button> -->
+<!-- <button type="button" class="closeBtn" (click)="closeProfileModal()">x</button> -->
 
-    <!-- Display Picture
+<!-- Display Picture
             <div class="profileImageWrapper">
 
                 <img [src]="userProfile.image" alt="Profile Picture" class="profileImage">
@@ -20,7 +18,7 @@
 
             </div> -->
 
-    <!-- <div class="profileInfo">
+<!-- <div class="profileInfo">
 
                 <div class="infoRow">
                     <span>Name: </span>
@@ -80,7 +78,7 @@
 
     </div> 
     }-->
-
+<div class="dashboard">
     <router-outlet></router-outlet>
     <!-- Header -->
     <div class="dashboardHeader">
@@ -96,12 +94,54 @@
         </div>
 
         <div class="dashboardButtons">
-            <button type="button" (click)="openProfileModal()">User Profile</button>
-            <button routerLink="/bookinghistory">My Bookings</button>
+            <button class="iconBtn notificationBtn" (click)="toggleNotifications()" matTooltip="Notifications">
+                <mat-icon>notifications</mat-icon>
+                @if(weatherNotifications.length > 0) {
+                <span class="badge">{{ weatherNotifications.length }}</span>
+                }
+            </button>
+
+            <button class="iconBtn" type="button" (click)="openProfileModal()" matTooltip="User Profile">
+                <mat-icon>account_circle</mat-icon>
+                <!-- <span>User Profile</span> -->
+            </button>
+
+            <button class="iconBtn" routerLink="/bookinghistory" matTooltip="My Bookings">
+                <mat-icon>event_note</mat-icon>
+                <!-- <span>My Bookings</span> -->
+            </button>
         </div>
 
     </div>
 
+    <!-- Notification Panel -->
+    @if(showNotifications){
+    <div class="notificationOverlay" (click)="closeNotifications()">
+        <div class="notificationPanel" (click)="$event.stopPropagation()">
+            <div class="panelHeader">
+
+                <h3>
+                    <mat-icon>notifications_active</mat-icon>
+                    Weather Alerts
+                </h3>
+
+                <button class="closeBtn" (click)="closeNotifications()">
+                    <mat-icon>close</mat-icon>
+                </button>
+
+                @for(notification of weatherNotifications; track $index){
+                <div class="notificationItem">
+                    {{ notification }}
+                </div>
+                }@empty {
+                <div class="emptyNotification">
+                    No alerts available
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+    }
 
     <!-- Booking -->
     <div class="bookingContainer">
@@ -138,6 +178,25 @@
                     }
                 </div>
 
+            </div>
+            }
+
+            <!-- Weather -->
+            @if (selectedVenue && weatherData) {
+            <div class="weatherCard">
+                <h3>🌤 Weather at {{ selectedVenue }}</h3>
+                <p>
+                    Temperature:
+                    {{ weatherData.current.temperature_2m }}°C
+                </p>
+                <p>
+                    Wind speed:
+                    {{ weatherData.current.wind_speed_10m }} km/h
+                </p>
+
+                <div class="weatherAdvice">
+                    {{ weatherMessage }}
+                </div>
             </div>
             }
 
@@ -312,7 +371,10 @@
 
             <div class="availabilityCard">
 
-                <h2>Slot Availability</h2>
+                <h2>
+                    <mat-icon>schedule</mat-icon>
+                    Slot Availability
+                </h2>
 
                 @for (court of courtAvailabilty; track court.court) {
                 <div class="availabilityItem">
@@ -346,9 +408,11 @@
             </div> --> */
                 /* } */
                 @for (booking of bookings; track $index) {
-                <app-booking-card [booking]="booking" (cancelBooking)="onCancelBooking($event)"> // [booking]="booking"
+                <app-booking-card [booking]="booking" (cancelBooking)="onCancelBooking($event)"> //
+                    [booking]="booking"
                     sends data from Parent ➜ Child using @Input()
-                </app-booking-card> //(cancelBooking)="onCancelBooking($event)" receives data from Child ➜ Parent using
+                </app-booking-card> //(cancelBooking)="onCancelBooking($event)" receives data from Child ➜ Parent
+                using
                 @Output()
                 }
                 <!-- @else {

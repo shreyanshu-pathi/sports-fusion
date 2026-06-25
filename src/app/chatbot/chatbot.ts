@@ -58,6 +58,6 @@ export class Chatbot {
         sender: 'bot',
         text: reply
       });
-    }, 500);
+    }, 3000);
   }
 }
